@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_myexam_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_list_item"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/image_myExam_infoIcon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="15dp"
+        android:src="@drawable/info_icon_3" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/image_myExam_infoIcon"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_myExam_info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="证券从业人员资格考试"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主办方 : "
+                android:textColor="#666666"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/text_myExam_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="中国银行协会"
+                android:textColor="#666666"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_myExam_tringle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/arrow1" />
+
+</RelativeLayout>

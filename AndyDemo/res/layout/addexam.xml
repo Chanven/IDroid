@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/base_head" />
+   
+  <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+            <RadioGroup
+                android:id="@+id/add_tab_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:background="@drawable/big_button_up"
+                android:orientation="horizontal"
+                 >
+
+                <RadioButton
+                    android:id="@+id/main_tab_addExam"
+                    style="@style/MMTabButton1"
+                    android:layout_weight="1.0"
+                    android:checked="true"
+                    android:text="添加考试" />
+
+                <RadioButton
+                    android:id="@+id/main_tab_myExam"
+                    style="@style/MMTabButton1"
+                    android:layout_weight="1.0"
+                   
+                    android:text="我的考试" />
+
+                <RadioButton
+                    android:id="@+id/main_tab_message"
+                    style="@style/MMTabButton1"
+                    android:layout_weight="1.0"
+                    android:text="我的通知" />
+
+                <RadioButton
+                    android:id="@+id/main_tab_testing"
+                    style="@style/MMTabButton1"
+                    android:layout_weight="1.0"
+                    android:text="测试" />
+                <RadioButton
+                    android:id="@+id/main_tab_settings"
+                    style="@style/MMTabButton1"
+                    android:layout_weight="1.0"
+                    android:text="设置" />
+            </RadioGroup>
+            
+       </LinearLayout>
+       
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+    </LinearLayout>
+</LinearLayout>
