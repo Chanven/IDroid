@@ -1,5 +1,77 @@
 package com.andy.demo.activity;
 
-public class MainActivity extends BaseActivity {
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+
+import com.andy.demo.R;
+import com.andy.demo.activity.fragment.CenterContainerFragment;
+import com.andy.demo.activity.fragment.LeftContainerFragment;
+import com.andy.demo.activity.fragment.RightContainerFragment;
+import com.andy.demo.slidingmenu.app.SlidingFragmentActivity;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
+public class MainActivity extends SlidingFragmentActivity {
+	
+	LeftContainerFragment mLeftFragment;
+	RightContainerFragment mRightFragment;
+	CenterContainerFragment mCenterFragment;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		initFragment(savedInstanceState);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+	
+	private void initFragment(Bundle savedInstanceState) {
+		//触摸模式（左右、是否全屏或者边框）、边距、淡入淡出参数等
+		SlidingMenu sm = getSlidingMenu();
+		sm.setMode(SlidingMenu.LEFT_RIGHT);
+		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		sm.setShadowWidthRes(R.dimen.shadow_width);
+		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		sm.setFadeDegree(0.35f);
+		sm.setTouchmodeMarginThreshold(10);
+		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		
+		//设置中间部分
+		setContentView(R.layout.center_frame);
+		if (savedInstanceState == null) {
+			FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+			mCenterFragment = new CenterContainerFragment();
+			t.replace(R.id.center_frame, mCenterFragment);
+			t.commit();
+		}else {
+			mCenterFragment = (CenterContainerFragment) this.getSupportFragmentManager().findFragmentById(R.id.center_frame);
+		}
+		
+		// 设置左边部分
+		setBehindContentView(R.layout.left_frame);
+		sm.setShadowDrawable(R.drawable.shadow_left);
+		if (savedInstanceState == null) {
+			FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+			mLeftFragment = new LeftContainerFragment();
+			t.replace(R.id.left_frame, mLeftFragment);
+			t.commit();
+		}else {
+			mLeftFragment = (LeftContainerFragment) this.getSupportFragmentManager().findFragmentById(R.id.left_frame);
+		}
+		
+		//设置右边部分
+		sm.setSecondaryMenu(R.layout.right_frame);
+		sm.setSecondaryShadowDrawable(R.drawable.shadow_right);
+		if (savedInstanceState == null) {
+			FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+			mRightFragment = new RightContainerFragment();
+			t.replace(R.id.right_frame, mRightFragment);
+			t.commit();
+		}else {
+			mRightFragment = (RightContainerFragment) this.getSupportFragmentManager().findFragmentById(R.id.right_frame);
+		}
+	}
 	
 }

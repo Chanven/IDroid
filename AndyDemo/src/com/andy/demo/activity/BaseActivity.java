@@ -82,7 +82,7 @@ public class BaseActivity extends FragmentActivity {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(getParent());
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage("你确定退出吗？")
 					.setCancelable(false)
 					.setPositiveButton("确定",
