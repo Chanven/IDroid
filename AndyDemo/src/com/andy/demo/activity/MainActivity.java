@@ -1,5 +1,6 @@
 package com.andy.demo.activity;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
@@ -9,6 +10,7 @@ import com.andy.demo.activity.fragment.LeftContainerFragment;
 import com.andy.demo.activity.fragment.RightContainerFragment;
 import com.andy.demo.slidingmenu.app.SlidingFragmentActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 
 public class MainActivity extends SlidingFragmentActivity {
 	
@@ -37,6 +39,22 @@ public class MainActivity extends SlidingFragmentActivity {
 		sm.setFadeDegree(0.35f);
 		sm.setTouchmodeMarginThreshold(10);
 		sm.setTouchModeBehind(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		
+		//设置above动画部分，可取消
+				CanvasTransformer transformer = new CanvasTransformer() {
+					@Override
+					public void transformCanvas(Canvas canvas, float percentOpen) {
+						float scale = (float) (1-percentOpen*0.15);
+						float px = 0.0f;
+						if (getSlidingMenu().getOpenedWidth() > 0) {
+							px = canvas.getWidth();
+						}else if (getSlidingMenu().getOpenedWidth() < 0) {
+							px = 0;
+						}
+						canvas.scale(scale, scale, px, canvas.getHeight()/2);
+					}
+				};
+				sm.setAboveCanvasTransformer(transformer);
 		
 		//设置中间部分
 		setContentView(R.layout.center_frame);
