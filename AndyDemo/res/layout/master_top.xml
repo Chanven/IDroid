@@ -11,8 +11,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
-            android:background="@null"
-            android:src="@drawable/bg_btn_back" />
+            android:background="@drawable/back_selector"
+            android:src="@drawable/back_selector" />
 
         <TextView
             android:id="@+id/mh_title_tv"
@@ -36,6 +36,5 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dip"
             android:visibility="invisible"
-            android:textColor="@color/white" 
-            />
+            android:textColor="@color/white" />
     </RelativeLayout>

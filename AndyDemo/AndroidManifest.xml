@@ -15,15 +15,9 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity  android:name=".activity.AddExamActivity"></activity>
-         <activity  android:name=".activity.MyExamActivity"></activity>
-          <activity  android:name=".activity.MyMessageActivity"></activity>
-           <activity  android:name=".activity.SettingActivity"></activity>
-           <activity android:name=".activity.TestingActivity"></activity>
     </application>
 
 </manifest>
