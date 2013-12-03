@@ -10,6 +10,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.andy.android.util.AutoCancelController;
+import com.andy.android.util.Cancellable;
 import com.andy.android.util.DLog;
 import com.andy.demo.R;
 import com.andy.demo.base.Constant;
@@ -18,6 +20,8 @@ public class BaseActivity extends FragmentActivity {
 
 	protected Button mh_left_btn, mh_right_btn;
 	protected TextView mh_title_tv;
+	
+	private AutoCancelController mAutoCancelController = new AutoCancelController();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +108,18 @@ public class BaseActivity extends FragmentActivity {
 			alert.show();
 			return true;
 		}
-
 		return super.onKeyDown(keyCode, event);
 		}
+	
+	public void autoCancel(Cancellable task) {
+		mAutoCancelController.add(task);
+	}
+
+	public void removeAutoCancel(Cancellable task) {
+		mAutoCancelController.remove(task);
+	}
+
+	public AutoCancelController getAutoCancelController() {
+		return mAutoCancelController;
+	}
 }

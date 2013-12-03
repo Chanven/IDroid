@@ -25,6 +25,7 @@ public class XResponseException extends Exception{
 	public static final int ERRORCODE_INVALID_ACCESSTOKEN = 3;
 	public static final int ERRORCODE_SERVER_REFUSE = 4;
 	public static final int ERRORCODE_OTHER = 5;
+	public static final int ERRORCODE_SESSION_INAVAILABLE = 6;
 	
 	public static final String ERROR_MESSAGE_SERVER_RETURN_ERROR_HEAD = "Error_message: server say - ";
 	
@@ -38,6 +39,11 @@ public class XResponseException extends Exception{
 	public XResponseException(int errCode) {
 		super("X API err:" + errCode);
 		mErrCode = errCode;
+	}
+	
+	public XResponseException(String errMsg){
+		super(errMsg);
+		mErrCode = ERRORCODE_OTHER;
 	}
 	
 	public XResponseException(int errCode, String errMsg) {
