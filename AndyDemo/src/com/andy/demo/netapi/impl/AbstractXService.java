@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.andy.demo.netapi.impl;
 
 import java.io.IOException;

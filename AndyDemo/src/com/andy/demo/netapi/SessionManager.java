@@ -18,5 +18,5 @@ public final class SessionManager {
     	}
     }
 	private static SessionManager mInstance = new SessionManager();
-	private Session mSession;
+	private Session mSession = new Session("020@85115258@189.cn", "0BF80C067991EEE114379AE5D7244A67","6100880b-38ae-4c55-8c74-3df7fdfbce4d", 1000);
 }

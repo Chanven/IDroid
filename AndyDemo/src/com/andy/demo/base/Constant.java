@@ -9,4 +9,6 @@ public class Constant {
 	public static int m_screenW, m_screenH;
 	/** 屏幕的逻辑密度 */
     public static float DENSITY = 1.0f;
+    
+    public static String WX_APP_ID = "wxf9caa6f564d72c8c";
 }

@@ -1,8 +1,11 @@
 package com.andy.demo.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 
 import com.andy.demo.R;
 import com.andy.demo.activity.fragment.CenterContainerFragment;
@@ -91,5 +94,40 @@ public class MainActivity extends SlidingFragmentActivity {
 			mRightFragment = (RightContainerFragment) this.getSupportFragmentManager().findFragmentById(R.id.right_frame);
 		}
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (getSlidingMenu().isMenuShowing()) {
+				getSlidingMenu().showContent();
+				return true;
+			}else {
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle("提示");
+				builder.setMessage("你确定退出吗？")
+				.setCancelable(false)
+				.setPositiveButton("确定",
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int id) {
+						finish();
+						System.exit(0);
+					}
+				})
+				.setNegativeButton("返回",
+						new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int id) {
+						dialog.cancel();
+					}
+				});
+				AlertDialog alert = builder.create();
+				alert.show();
+			}
+//			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 	
 }

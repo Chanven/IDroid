@@ -11,8 +11,6 @@ import java.util.Set;
 
 import com.andy.android.util.DLog;
 
-import android.util.Log;
-
 /**
  * @author luogh
  * 
@@ -60,7 +58,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#clear()
+	 * @see com.andy.android.content.ObjectCache#clear()
 	 */
 	@Override
 	public synchronized void clear() {
@@ -68,7 +66,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#get(java.lang.Object)
+	 * @see com.andy.android.content.ObjectCache#get(java.lang.Object)
 	 */
 	@Override
 	public synchronized O get(K key) {
@@ -81,7 +79,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#capacity()
+	 * @see com.andy.android.content.ObjectCache#capacity()
 	 */
 	@Override
 	public int capacity() {
@@ -89,7 +87,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#size()
+	 * @see com.andy.android.content.ObjectCache#size()
 	 */
 	@Override
 	public synchronized int size() {
@@ -97,7 +95,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#remove(java.lang.Object)
+	 * @see com.andy.android.content.ObjectCache#remove(java.lang.Object)
 	 */
 	@Override
 	public synchronized O remove(K key) {
@@ -110,7 +108,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#isEmpty()
+	 * @see com.andy.android.content.ObjectCache#isEmpty()
 	 */
 	@Override
 	public synchronized boolean isEmpty() {
@@ -118,7 +116,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#put(java.lang.Object, java.lang.Object)
+	 * @see com.andy.android.content.ObjectCache#put(java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	public synchronized boolean put(K key, O object) {
@@ -156,7 +154,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#entrySet()
+	 * @see com.andy.android.content.ObjectCache#entrySet()
 	 */
 	@Override
 	public synchronized List<Entry<K, O>> getEntries() {
@@ -172,7 +170,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#prune()
+	 * @see com.andy.android.content.ObjectCache#prune()
 	 */
 	@Override
 	public synchronized int prune() {
@@ -186,7 +184,7 @@ public final class LinearVisibleObjectCache<K, O> implements ObjectCache<K, O> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.cn21.android.content.ObjectCache#contains(java.lang.Object)
+	 * @see com.andy.android.content.ObjectCache#contains(java.lang.Object)
 	 */
 	@Override
 	public synchronized boolean contains(K key) {

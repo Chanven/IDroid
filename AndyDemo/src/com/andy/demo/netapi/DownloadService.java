@@ -12,6 +12,7 @@ public interface DownloadService extends XService<BasicServiceParams> {
 		public void onConnected(DownloadService service);
 		public void onProgress(DownloadService service, long completedBytes, long txRate);
 	}
+	
 	public long download(String url, long bytesOffset, long bytesToDownload, OutputStream outStream, DownloadObserver observer) 
 			throws XResponseException, IOException, CancellationException;
 

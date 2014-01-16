@@ -5,5 +5,10 @@
     android:background="@color/bg_gray"
     android:orientation="vertical" >
     
+    <Button 
+        android:id="@+id/wx_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="微信分享"/>
 
 </LinearLayout>
