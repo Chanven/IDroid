@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.andy.android.util.AutoCancelController;
 import com.andy.android.util.Cancellable;
 import com.andy.android.util.DLog;
+import com.andy.demo.ApplicationEx;
 import com.andy.demo.R;
 import com.andy.demo.base.Constant;
 

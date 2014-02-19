@@ -1,4 +1,4 @@
-package com.andy.demo.activity;
+package com.andy.demo;
 
 import java.util.HashMap;
 import java.util.concurrent.Executor;
@@ -12,6 +12,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.andy.android.util.DLog;
 import com.andy.demo.BuildConfig;
+import com.andy.demo.activity.ActivityManager;
 import com.andy.demo.base.Constant;
 
 public class ApplicationEx extends Application {

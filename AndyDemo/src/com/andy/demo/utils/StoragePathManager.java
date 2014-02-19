@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import com.andy.android.util.DLog;
 import com.andy.android.util.ReflectionHelper;
 import com.andy.android.util.StorageVolumeWrapper;
-import com.andy.demo.activity.ApplicationEx;
+import com.andy.demo.ApplicationEx;
 
 public class StoragePathManager {
 	
