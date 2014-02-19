@@ -8,9 +8,12 @@
 
     <application
         android:name=".activity.ApplicationEx"
-        android:debuggable="false"
+        android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
+        
+        <meta-data android:name="UMENG_APPKEY"  android:value="52d8af6c56240b9bbf004e19" />
+        <meta-data android:name="UMENG_CHANNEL"  android:value="Leic" />
         
         <activity
             android:name=".activity.MainActivity"
@@ -21,7 +24,13 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".activity.SyncTestActivity"/>
         
     </application>
+    
+    <!-- ###################权限###################### -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  <!-- 检测网络状态 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- 缓存资源优先存入SDcard -->
+    <uses-permission android:name="android.permission.INTERNET" />              <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
 
 </manifest>

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.CancellationException;
 
+import org.apache.http.client.ClientProtocolException;
+
+import com.andy.demo.analysis.bean.MyIdInitResult;
 import com.andy.demo.netapi.exception.XResponseException;
 import com.andy.demo.netapi.param.BasicServiceParams;
 
@@ -17,5 +20,8 @@ public interface DownloadService extends XService<BasicServiceParams> {
 			throws XResponseException, IOException, CancellationException;
 
 	public long getContentLength();
+	
+	public MyIdInitResult initMyId(boolean qrCodeLogin) throws XResponseException,
+	ClientProtocolException, IOException, CancellationException;
 
 }

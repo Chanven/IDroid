@@ -60,6 +60,8 @@ public abstract class AutoCancelServiceFramework<Params, Progress, Result> exten
 			if(mDownloadService != null) {
 				mDownloadService.abortService();
 			}
+			//其他服务
+			//...
 		}
 	}
 	
@@ -69,6 +71,8 @@ public abstract class AutoCancelServiceFramework<Params, Progress, Result> exten
 				XServiceFactory.get().releaseDownloadService(mDownloadService);
 				mDownloadService = null;
 			}
+			//其他服务
+			//...
 		}
 	}
 

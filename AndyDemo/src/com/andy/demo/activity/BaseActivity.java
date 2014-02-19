@@ -1,5 +1,7 @@
 package com.andy.demo.activity;
 
+import java.util.concurrent.Executor;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -95,5 +97,26 @@ public class BaseActivity extends FragmentActivity {
 
 	public AutoCancelController getAutoCancelController() {
 		return mAutoCancelController;
+	}
+	
+	public Executor getMainExecutor() {
+		return ((ApplicationEx) getApplication()).getMainExecutor();
+
+	}
+
+	public Executor getSerialExecutor() {
+		return ((ApplicationEx) getApplication()).getSerialExecutor();
+	}
+
+	public Executor getTransferExecutor() {
+		return ((ApplicationEx) getApplication()).getTransferExecutor();
+	}
+
+	public Executor getNoTransferExcutor() {
+		return ((ApplicationEx) getApplication()).getNoTransferExcutor();
+	}
+	
+	public Executor getPicExcutor(){
+		return ((ApplicationEx) getApplication()).getPicExcutor();
 	}
 }

@@ -38,9 +38,9 @@ public class ApplicationEx extends Application {
         //强制预加载
         try {
 			Class.forName("android.os.AsyncTask");
-			Class.forName("com.cn21.android.util.AsyncFramework");
-			Class.forName("com.cn21.android.util.AutoCancelFramework");
-			Class.forName("com.cn21.android.util.AutoCancelServiceFramework");
+			Class.forName("com.andy.android.util.AsyncFramework");
+			Class.forName("com.andy.android.util.AutoCancelFramework");
+			Class.forName("com.andy.demo.utils.AutoCancelServiceFramework");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

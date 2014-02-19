@@ -6,15 +6,18 @@ import java.io.OutputStream;
 import java.util.concurrent.CancellationException;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 
 import com.andy.android.util.DLog;
+import com.andy.demo.analysis.bean.MyIdInitResult;
 import com.andy.demo.netapi.ConstantConfig;
 import com.andy.demo.netapi.DownloadService;
 import com.andy.demo.netapi.Session;
 import com.andy.demo.netapi.exception.XResponseException;
 import com.andy.demo.netapi.param.BasicServiceParams;
+import com.andy.demo.netapi.request.impl.MyIdInitRequest;
 import com.andy.demo.netapi.util.FlowAccumulatorInputStream;
 import com.andy.demo.netapi.util.HelperUtil;
 
@@ -30,7 +33,9 @@ public final class DownloadServiceAgent extends
 	
 	public DownloadServiceAgent(Session session) {
 		super();
-		mSession = session;
+		if (null != session) {
+			mSession = session;
+		}
 		mParams = new BasicServiceParams();
 		mParams.setDefaultConnTimeout(DEFAULT_CONN_TIME_OUT);
 		mParams.setDefaultSendTimeout(DEFAULT_SEND_TIME_OUT);
@@ -41,6 +46,13 @@ public final class DownloadServiceAgent extends
 	public void resetSession(Session session) {
 		reset();
 		mSession = session; 
+	}
+	
+	//http请求服务模块方法，放在这里测试
+	public MyIdInitResult initMyId(boolean qrCodeLogin)
+			throws XResponseException, ClientProtocolException,
+			IOException, CancellationException {
+		return send(new MyIdInitRequest(qrCodeLogin), null);
 	}
 
 	@Override
