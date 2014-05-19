@@ -6,15 +6,15 @@
     android:orientation="vertical" >
     
     <Button 
-        android:id="@+id/wx_share"
+        android:id="@+id/wx_text_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="微信分享"/>
+        android:text="微信text分享"/>
     <Button 
-        android:id="@+id/jc_share"
+        android:id="@+id/wx_image_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="分享"/>
+        android:text="微信image分享"/>
     <Button 
         android:id="@+id/sync_test"
         android:layout_width="wrap_content"

@@ -1,14 +1,10 @@
-package com.andy.demo.utils;
+package com.andy.demo.netapi;
 
 import java.util.concurrent.CancellationException;
 
 import com.andy.android.util.AutoCancelController;
 import com.andy.android.util.AutoCancelFramework;
 import com.andy.demo.activity.BaseActivity;
-import com.andy.demo.netapi.DownloadService;
-import com.andy.demo.netapi.Session;
-import com.andy.demo.netapi.SessionManager;
-import com.andy.demo.netapi.XServiceFactory;
 import com.andy.demo.netapi.exception.XResponseException;
 
 /**

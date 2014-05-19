@@ -1,23 +1,20 @@
 package com.andy.demo.activity.fragment;
 
-import java.io.ByteArrayOutputStream;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.andy.android.util.DLog;
 import com.andy.demo.R;
 import com.andy.demo.activity.BaseActivity;
 import com.andy.demo.activity.SyncTestActivity;
 import com.andy.demo.base.Constant;
 import com.andy.demo.slidingmenu.app.SlidingFragmentActivity;
+import com.andy.demo.utils.ImageUtils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
@@ -60,8 +57,8 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 	}
 	
 	private void initView(View container) {
-		container.findViewById(R.id.wx_share).setOnClickListener(mOnClickListener);
-		container.findViewById(R.id.jc_share).setOnClickListener(mOnClickListener);
+		container.findViewById(R.id.wx_text_share).setOnClickListener(mOnClickListener);
+		container.findViewById(R.id.wx_image_share).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.sync_test).setOnClickListener(mOnClickListener);
 	}
 	
@@ -70,7 +67,7 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
-			case R.id.wx_share:
+			case R.id.wx_text_share:
 				String share_text = "Share API Test";
 				// 初始化一个WXTextObject对象
 				WXTextObject textObject = new WXTextObject();
@@ -91,13 +88,14 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 				wxapi.sendReq(req);
 				
 				break;
-			case R.id.jc_share:
+			case R.id.wx_image_share:
+				//图片分享
 				Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
 				WXImageObject imgObj = new WXImageObject(bitmap);
 				
 				WXMediaMessage smsg = new WXMediaMessage();
 				smsg.mediaObject = imgObj;
-				smsg.thumbData = bmpToByteArray(bitmap, true);
+				smsg.thumbData = ImageUtils.bmpToByteArray(bitmap, true);
 				
 				SendMessageToWX.Req  req2 = new SendMessageToWX.Req();
 				req2.transaction = buildTransaction("image");
@@ -105,7 +103,7 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 				req2.scene = SendMessageToWX.Req.WXSceneTimeline;
 				
 				wxapi.sendReq(req2);
-				
+				break;
 			case R.id.sync_test:
 				mContext.startActivity(new Intent(mContext,SyncTestActivity.class));
 				break;
@@ -115,23 +113,6 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 		}
 	};
 	
-	public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		bmp.compress(CompressFormat.PNG, 100, output);
-		if (needRecycle) {
-			bmp.recycle();
-		}
-		
-		byte[] result = output.toByteArray();
-		try {
-			output.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-
 	private String buildTransaction(final String type) {
 		return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
 	}

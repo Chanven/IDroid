@@ -5,10 +5,22 @@ import org.xml.sax.SAXException;
 
 import com.andy.demo.analysis.bean.MyIdInitResult;
 
-
+/**
+ * 放在DownloadService中测试
+ * @author guoch
+ *
+ */
 public class MyIdInitAnalysis extends ErrorAnalysis{
 	public MyIdInitResult myIdInitResult = new MyIdInitResult();
 	
+	
+	/**
+	 * 也可在这里新建参数对象
+	 */
+	@Override
+	public void startDocument() throws SAXException {
+		super.startDocument();
+	}
 	
 	/**
 	 * 先执行startElement，再执行parseElement

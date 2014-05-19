@@ -13,8 +13,8 @@ import android.widget.ImageView;
 
 import com.andy.demo.R;
 import com.andy.demo.analysis.bean.MyIdInitResult;
+import com.andy.demo.netapi.AutoCancelServiceFramework;
 import com.andy.demo.netapi.exception.XResponseException;
-import com.andy.demo.utils.AutoCancelServiceFramework;
 import com.andy.demo.utils.StoragePathManager;
 
 /**
