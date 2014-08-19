@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import com.andy.demo.R;
 import com.andy.demo.analysis.bean.MyIdInitResult;
+import com.andy.demo.jasonnet.XBusinessAgent;
+import com.andy.demo.jasonnet.data.KuaidiInfo;
 import com.andy.demo.netapi.AutoCancelServiceFramework;
 import com.andy.demo.netapi.exception.XResponseException;
 import com.andy.demo.utils.StoragePathManager;
@@ -66,6 +68,10 @@ public class SyncTestActivity extends BaseActivity{
 					MyIdInitResult result = mDownloadService.initMyId(true);
 					String url = result.qrCodeUrl;
 					
+					//测试http请求，json解析模块
+					XBusinessAgent agent = new XBusinessAgent();
+					KuaidiInfo info = agent.getJdInfo();
+					
 				} catch (CancellationException e) {
 					e.printStackTrace();
 				} catch (XResponseException e) {
@@ -78,8 +84,11 @@ public class SyncTestActivity extends BaseActivity{
 
 			@Override
 			protected void onPostExecute(Bitmap result) {
-				if (result != null) {
+				if (mDialog != null && mDialog.isShowing()) {
 					mDialog.dismiss();
+				}
+				
+				if (result != null) {
 					imageView.setImageBitmap(result);
 				}
 			}

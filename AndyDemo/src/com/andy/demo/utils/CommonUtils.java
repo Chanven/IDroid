@@ -10,7 +10,7 @@ public class CommonUtils {
 	
 	/**
 	 * 更改飞行模式状态
-	 * 只适用于4.2一下版本
+	 * 只适用于4.2以下版本
 	 * */
 	public static void changeAirplaneStatus(Context context){
 		ContentResolver cr = context.getContentResolver();

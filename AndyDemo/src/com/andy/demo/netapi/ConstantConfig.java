@@ -6,7 +6,6 @@ public final class ConstantConfig {
 
 	public final static String PLATFORM_SERVER_HOST = "http://api.cloud.189.cn/";
 	public final static String SECURED_PLATFORM_SERVER_HOST = "https://api.cloud.189.cn/";
-	public final static String MICROBLOG_OAUTH_URL = PLATFORM_SERVER_HOST + "microblogOAuthRedirect.action";
 	public static boolean DEBUG = true;
 	public static String msAppKey = null;
 	public static String msAppSecret = null;

@@ -12,6 +12,7 @@ public class XResponseException extends Exception{
 	public static final int ERRCODE_SERVER_RETURN_ERROR_MESSAGE = -3;
 	public static final int ERRCODE_SERVER_RETURN_JSON_TRANS = -4;
 	public static final int ERRCODE_SERVER_RETURN_EMPTY = -5;
+	public static final int ERRCODE_SERVER_TIMEOUT = -6;
 	
 	/*
 	1	数据校验错误，即参数校验不通过，并在message中给出具体参数
@@ -26,6 +27,9 @@ public class XResponseException extends Exception{
 	public static final int ERRORCODE_SERVER_REFUSE = 4;
 	public static final int ERRORCODE_OTHER = 5;
 	public static final int ERRORCODE_SESSION_INAVAILABLE = 6;
+	public static final int ERRORCODE_NETWORK_UNAVAILABLE = 7;
+	
+	private static final String ERROR_MESSAGE_NETWORK_UNAVAILABLE = "没有网络连接，请检查网络设置 !";
 	
 	public static final String ERROR_MESSAGE_SERVER_RETURN_ERROR_HEAD = "Error_message: server say - ";
 	
@@ -33,6 +37,7 @@ public class XResponseException extends Exception{
 	private static final String ERROR_MESSAGE_LOCAL_ARGUMENT_UNABLE = "Error_message: local argument unable";
 	private static final String ERROR_MESSAGE_SERVER_RETURN_JSON_TRANS = "Error_message: server return json trans error";
 	private static final String ERROR_MESSAGE_SERVER_RETURN_EMPTY = "Error_message: server return nothing";
+	private static final String ERROR_MESSAGE_SERVER_TIMEOUT = "Error_message: server time out";
 	
 	private int mErrCode;
 	
@@ -70,6 +75,12 @@ public class XResponseException extends Exception{
 			break;
 		case ERRCODE_SERVER_RETURN_JSON_TRANS:
 			returnString = ERROR_MESSAGE_SERVER_RETURN_JSON_TRANS;
+			break;
+		case ERRCODE_SERVER_TIMEOUT:
+			returnString = ERROR_MESSAGE_SERVER_TIMEOUT;
+			break;
+		case ERRORCODE_NETWORK_UNAVAILABLE:
+			returnString = ERROR_MESSAGE_NETWORK_UNAVAILABLE;
 			break;
 		default:
 			break;

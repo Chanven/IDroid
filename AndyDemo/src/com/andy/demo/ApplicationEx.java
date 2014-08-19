@@ -100,14 +100,6 @@ public class ApplicationEx extends Application {
     	return mSerialExecutor;
     }
     
-    public Executor getTransferExecutor(){
-    	return mTransferExecutor;
-    }
-    
-    public Executor getNoTransferExcutor(){
-    	return mNoTransferExcutor;
-    }
-    
     public Executor getPicExcutor(){
     	return mPicExecutor;
     }
@@ -116,8 +108,6 @@ public class ApplicationEx extends Application {
     private HashMap<String, Object> mActivityParamsMap = new HashMap<String, Object>();
     private final static Executor mMainExecutor = Executors.newFixedThreadPool(2);
     private final static Executor mSerialExecutor = Executors.newFixedThreadPool(1);
-    private final static Executor mTransferExecutor = Executors.newFixedThreadPool(1);
-    private final static Executor mNoTransferExcutor = Executors.newFixedThreadPool(1);
     private final static Executor mPicExecutor = Executors.newFixedThreadPool(5);
     
 }

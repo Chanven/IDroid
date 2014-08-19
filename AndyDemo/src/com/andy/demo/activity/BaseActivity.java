@@ -109,14 +109,6 @@ public class BaseActivity extends FragmentActivity {
 		return ((ApplicationEx) getApplication()).getSerialExecutor();
 	}
 
-	public Executor getTransferExecutor() {
-		return ((ApplicationEx) getApplication()).getTransferExecutor();
-	}
-
-	public Executor getNoTransferExcutor() {
-		return ((ApplicationEx) getApplication()).getNoTransferExcutor();
-	}
-	
 	public Executor getPicExcutor(){
 		return ((ApplicationEx) getApplication()).getPicExcutor();
 	}
