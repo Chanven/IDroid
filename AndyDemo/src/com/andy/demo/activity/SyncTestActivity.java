@@ -10,13 +10,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.andy.android.util.AutoCancelController;
+import com.andy.android.util.AutoCancelFramework;
+import com.andy.demo.ApplicationEx;
 import com.andy.demo.R;
 import com.andy.demo.analysis.bean.MyIdInitResult;
-import com.andy.demo.jasonnet.XBusinessAgent;
-import com.andy.demo.jasonnet.data.KuaidiInfo;
+import com.andy.demo.jsonnet.XBusinessAgent;
+import com.andy.demo.jsonnet.data.KuaidiInfo;
 import com.andy.demo.netapi.AutoCancelServiceFramework;
 import com.andy.demo.netapi.exception.XResponseException;
+import com.andy.demo.utils.JsonUtils;
 import com.andy.demo.utils.StoragePathManager;
 
 /**
@@ -27,6 +32,7 @@ import com.andy.demo.utils.StoragePathManager;
  */
 public class SyncTestActivity extends BaseActivity{
 	private ImageView imageView;
+	private TextView testTv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +40,13 @@ public class SyncTestActivity extends BaseActivity{
 		setContentView(R.layout.sync_test_layout);
 		initView();
 		initData();
+		new getJdInfoFramework(this.getAutoCancelController()).executeOnExecutor(ApplicationEx.app.getSerialExecutor());
 	}
 	
 	private void initView(){
 		imageView = (ImageView) this.findViewById(R.id.img); 
 		imageView.setImageResource(R.drawable.icon);
+		testTv = (TextView) this.findViewById(R.id.test_tv);
 	}
 	
 	private void initData() {
@@ -68,10 +76,6 @@ public class SyncTestActivity extends BaseActivity{
 					MyIdInitResult result = mDownloadService.initMyId(true);
 					String url = result.qrCodeUrl;
 					
-					//测试http请求，json解析模块
-					XBusinessAgent agent = new XBusinessAgent();
-					KuaidiInfo info = agent.getJdInfo();
-					
 				} catch (CancellationException e) {
 					e.printStackTrace();
 				} catch (XResponseException e) {
@@ -93,6 +97,47 @@ public class SyncTestActivity extends BaseActivity{
 				}
 			}
 			
-		}.executeOnExecutor(this.getSerialExecutor()));
+		}.executeOnExecutor(ApplicationEx.app.getSerialExecutor()));
+	}
+	
+	//测试http请求，json解析模块
+	class getJdInfoFramework extends AutoCancelFramework<Void, Void, KuaidiInfo>{
+	    AutoCancelController mController;
+
+        public getJdInfoFramework(AutoCancelController autoCancelController){
+            super(autoCancelController);
+            if (null != autoCancelController) {
+                this.mController = autoCancelController;
+                mController.add(this);
+            }
+        }
+
+        @Override
+        protected KuaidiInfo doInBackground(Void... params) {
+            XBusinessAgent agent = new XBusinessAgent();
+            KuaidiInfo info = null;
+            try {
+                info = agent.getJdInfo();
+            } catch (CancellationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (XResponseException e) {
+                e.printStackTrace();
+            }
+            return info;
+        }
+        
+        @Override
+        protected void onPostExecute(KuaidiInfo result) {
+            super.onPostExecute(result);
+            if (null != mController) {
+                mController.remove(this);
+            }
+            if (null != result) {
+                testTv.setText(JsonUtils.toJsonString(result));
+            }
+        }
+	    
 	}
 }

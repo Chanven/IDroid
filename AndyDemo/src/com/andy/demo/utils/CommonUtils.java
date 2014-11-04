@@ -29,4 +29,9 @@ public class CommonUtils {
 		Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);     
 		context.sendBroadcast(intent);  
 	}
+	
+	/**构建唯一标识*/
+	public static String buildTransaction(final String type) {
+        return (type == null)? String.valueOf(System.currentTimeMillis()): type + System.currentTimeMillis();
+    }
 }

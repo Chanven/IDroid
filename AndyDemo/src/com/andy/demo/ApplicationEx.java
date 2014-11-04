@@ -18,7 +18,7 @@ import com.andy.demo.base.Constant;
 public class ApplicationEx extends Application {
 	private ActivityManager activityManager = null;
     
-	public static Application app = null;
+	public static ApplicationEx app = null;
 	
     public ApplicationEx() {
     	
@@ -41,7 +41,7 @@ public class ApplicationEx extends Application {
 			Class.forName("android.os.AsyncTask");
 			Class.forName("com.andy.android.util.AsyncFramework");
 			Class.forName("com.andy.android.util.AutoCancelFramework");
-			Class.forName("com.andy.demo.utils.AutoCancelServiceFramework");
+			Class.forName("com.andy.demo.utils.netapi.AutoCancelServiceFramework");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -92,14 +92,23 @@ public class ApplicationEx extends Application {
     	return mActivityParamsMap.remove(key);
     }
     
+    /**
+     * 获取额外的运行线程池，2。(主要供Activity动态下载图片等资源，避免阻塞主要运行线程)
+     */
     public Executor getMainExecutor() {
     	return mMainExecutor;
     }
     
+    /**
+     * 获取空闲任务类的运行线程池，1。（主要用于运行时间不敏感的运行时间可能较长的如清理无用缓存文件、流量上报等任务）
+     */
     public Executor getSerialExecutor() {
     	return mSerialExecutor;
     }
     
+    /**
+     * 获取图片下载线程池，5。(主要供Activity动态下载图片等资源，避免阻塞主要运行线程)
+     */
     public Executor getPicExcutor(){
     	return mPicExecutor;
     }

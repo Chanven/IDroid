@@ -100,16 +100,4 @@ public class BaseActivity extends FragmentActivity {
 		return mAutoCancelController;
 	}
 	
-	public Executor getMainExecutor() {
-		return ((ApplicationEx) getApplication()).getMainExecutor();
-
-	}
-
-	public Executor getSerialExecutor() {
-		return ((ApplicationEx) getApplication()).getSerialExecutor();
-	}
-
-	public Executor getPicExcutor(){
-		return ((ApplicationEx) getApplication()).getPicExcutor();
-	}
 }
