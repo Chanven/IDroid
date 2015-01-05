@@ -1,7 +1,5 @@
 package com.andy.demo.activity;
 
-import java.util.concurrent.Executor;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -39,6 +37,10 @@ public class BaseActivity extends FragmentActivity {
 		mh_left_btn = (Button) findViewById(R.id.mh_left_btn);
 		mh_right_btn = (Button) findViewById(R.id.mh_right_btn);
 		mh_title_tv = (TextView) findViewById(R.id.mh_title_tv);
+	}
+	
+	protected <T> T findView(int id){
+	    return (T)super.findViewById(id);
 	}
 	
 	// 获取和设置屏幕分辨率

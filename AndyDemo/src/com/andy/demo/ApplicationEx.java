@@ -93,7 +93,7 @@ public class ApplicationEx extends Application {
     }
     
     /**
-     * 获取额外的运行线程池，2。(主要供Activity动态下载图片等资源，避免阻塞主要运行线程)
+     * 获取额外的运行线程池，2。(主要供Activiy处理后台业务逻辑，如AsyncFramework)
      */
     public Executor getMainExecutor() {
     	return mMainExecutor;

@@ -32,7 +32,8 @@ import com.andy.demo.utils.StoragePathManager;
  */
 public class SyncTestActivity extends BaseActivity{
 	private ImageView imageView;
-	private TextView testTv;
+	private TextView xmlTestTv;
+	private TextView jsonTestTv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,8 @@ public class SyncTestActivity extends BaseActivity{
 	private void initView(){
 		imageView = (ImageView) this.findViewById(R.id.img); 
 		imageView.setImageResource(R.drawable.icon);
-		testTv = (TextView) this.findViewById(R.id.test_tv);
+		xmlTestTv = findView(R.id.xml_test_tv);
+		jsonTestTv = findView(R.id.json_test_tv);
 	}
 	
 	private void initData() {
@@ -73,9 +75,15 @@ public class SyncTestActivity extends BaseActivity{
 					bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 					
 					//测试http请求，xml解析模块
-					MyIdInitResult result = mDownloadService.initMyId(true);
-					String url = result.qrCodeUrl;
-					
+					final MyIdInitResult result = mDownloadService.initMyId(true);
+					if (null != result) {
+					    runOnUiThread(new Runnable(){
+                            public void run() {
+                                xmlTestTv.setText(JsonUtils.toJsonString(result));
+                            }
+                        });
+                        
+                    }
 				} catch (CancellationException e) {
 					e.printStackTrace();
 				} catch (XResponseException e) {
@@ -135,7 +143,7 @@ public class SyncTestActivity extends BaseActivity{
                 mController.remove(this);
             }
             if (null != result) {
-                testTv.setText(JsonUtils.toJsonString(result));
+                jsonTestTv.setText(JsonUtils.toJsonString(result));
             }
         }
 	    
