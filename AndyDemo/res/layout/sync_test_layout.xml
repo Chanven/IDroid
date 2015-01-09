@@ -11,6 +11,12 @@
         android:layout_height="wrap_content"
         android:scaleType="fitXY"/>
     
+    <Button 
+        android:id="@+id/down_test_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Download"/>
+    
     <TextView 
         android:id="@+id/xml_test_tv"
         android:layout_width="wrap_content"

@@ -3,12 +3,21 @@ package com.andy.demo.activity;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.concurrent.CancellationException;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +31,6 @@ import com.andy.demo.jsonnet.data.KuaidiInfo;
 import com.andy.demo.netapi.AutoCancelServiceFramework;
 import com.andy.demo.netapi.exception.XResponseException;
 import com.andy.demo.utils.JsonUtils;
-import com.andy.demo.utils.StoragePathManager;
 
 /**
  * 测试类Activity
@@ -31,6 +39,10 @@ import com.andy.demo.utils.StoragePathManager;
  *
  */
 public class SyncTestActivity extends BaseActivity{
+  //获取SD卡的根目录
+    String sdcard = Environment.getExternalStorageDirectory()+"/";
+  //文件要保存的位置
+    String filepath = sdcard+"ImageDownload/";
 	private ImageView imageView;
 	private TextView xmlTestTv;
 	private TextView jsonTestTv;
@@ -49,12 +61,34 @@ public class SyncTestActivity extends BaseActivity{
 		imageView.setImageResource(R.drawable.icon);
 		xmlTestTv = findView(R.id.xml_test_tv);
 		jsonTestTv = findView(R.id.json_test_tv);
+		findView(R.id.down_test_btn).setOnClickListener(mOnClickListener);
 	}
+	
+	OnClickListener mOnClickListener = new OnClickListener(){
+        
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.down_test_btn:
+                    new Thread(new Runnable(){
+                        
+                        @Override
+                        public void run() {
+                            GetImage("http://a4.att.hudong.com/20/84/01300001235467137792849329123.jpg");
+                        }
+                    }).start();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
 	
 	private void initData() {
 		autoCancel(new AutoCancelServiceFramework<Void, Bitmap, Bitmap>(this){
 			private ProgressDialog mDialog = null;
-			File file = new File(StoragePathManager.get().getMainPath() + "test.jpg");
+			File file = new File(filepath + "test.jpg");
 			@Override
 			protected void onPreExecute() {
 				if (mDialog == null) {
@@ -106,6 +140,45 @@ public class SyncTestActivity extends BaseActivity{
 			}
 			
 		}.executeOnExecutor(ApplicationEx.app.getSerialExecutor()));
+	}
+	
+	/**下载文件*/
+	public void GetImage(String urlString){
+        try{
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            InputStream istream = conn.getInputStream();
+            String filename = urlString.substring(urlString.lastIndexOf("/")+1);
+            
+            File directory = new File(filepath);
+            if(!directory.exists()){
+                directory.mkdir();
+            }
+            File newFile = new File(filepath+filename);
+            newFile.createNewFile();
+            
+            OutputStream output = new FileOutputStream(newFile);
+            byte[] buffer = new byte[1024];
+            while(istream.read(buffer)!=-1){
+                output.write(buffer);
+            }
+            output.flush();
+            output.close();
+            istream.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+	
+	/**获取“账号与同步”中指定类型的账号数据*/
+	void getAccount(){
+	    AccountManager mAccountManager = AccountManager.get(this);
+	    //com.cn21.ecloud.sync 为账户类型
+        Account[] account = mAccountManager.getAccountsByType("com.cn21.ecloud.sync");
+        String accountString="";
+        for (int i = 0; i < account.length; i++) {
+            accountString = accountString+"    "+account[i] +mAccountManager.getPassword(account[i]);
+        }
 	}
 	
 	//测试http请求，json解析模块

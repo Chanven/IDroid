@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +13,6 @@ import com.andy.android.util.AutoCancelController;
 import com.andy.android.util.Cancellable;
 import com.andy.android.util.DLog;
 import com.andy.demo.ApplicationEx;
-import com.andy.demo.R;
 import com.andy.demo.base.Constant;
 
 public class BaseActivity extends FragmentActivity {
@@ -33,13 +33,8 @@ public class BaseActivity extends FragmentActivity {
 		DLog.d(getClass().getSimpleName(), "onCreate()");
 	}
 	
-	protected void initHead() {
-		mh_left_btn = (Button) findViewById(R.id.mh_left_btn);
-		mh_right_btn = (Button) findViewById(R.id.mh_right_btn);
-		mh_title_tv = (TextView) findViewById(R.id.mh_title_tv);
-	}
-	
-	protected <T> T findView(int id){
+	@SuppressWarnings("unchecked")
+    protected <T extends View> T findView(int id){
 	    return (T)super.findViewById(id);
 	}
 	

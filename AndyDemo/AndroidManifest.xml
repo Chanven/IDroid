@@ -27,6 +27,7 @@
         
         <activity android:name="com.andy.demo.activity.SyncTestActivity"/>
         <activity android:name="com.andy.demo.activity.ShareTestActivity"/>
+        <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
         
     </application>
     

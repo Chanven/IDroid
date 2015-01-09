@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.andy.demo.R;
 import com.andy.demo.activity.BaseActivity;
+import com.andy.demo.activity.LocalFileManagerActivity;
 import com.andy.demo.activity.ShareTestActivity;
 import com.andy.demo.activity.SyncTestActivity;
 import com.andy.demo.slidingmenu.app.SlidingFragmentActivity;
@@ -44,6 +45,7 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 	private void initView(View container) {
 		container.findViewById(R.id.share_test).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.sync_test).setOnClickListener(mOnClickListener);
+		container.findViewById(R.id.local_file_manager_btn).setOnClickListener(mOnClickListener);
 	}
 	
 	OnClickListener mOnClickListener = new OnClickListener() {
@@ -57,6 +59,9 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 			case R.id.sync_test:
 				mContext.startActivity(new Intent(mContext,SyncTestActivity.class));
 				break;
+			case R.id.local_file_manager_btn:
+			    mContext.startActivity(new Intent(mContext,LocalFileManagerActivity.class));
+			    break;
 			default:
 				break;
 			}
