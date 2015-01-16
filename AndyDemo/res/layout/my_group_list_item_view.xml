@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/my_group_list_item_bg_selector"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="62dp"
+        android:paddingBottom="6dp"
+        android:paddingTop="6.0dip" >
+
+        <ImageView
+            android:id="@+id/friend_avatar_iv"
+            android:layout_width="50.0dip"
+            android:layout_height="50.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:src="@drawable/icon" />
+
+        <ImageView
+            android:id="@+id/friend_status_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/friend_avatar_iv"
+            android:layout_alignRight="@id/friend_avatar_iv"
+            android:src="@drawable/my_group_status_online" />
+
+        <TextView
+            android:id="@+id/friend_list_item_name_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="25.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="18.0dip"
+            android:layout_toRightOf="@id/friend_avatar_iv"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:includeFontPadding="false"
+            android:padding="0.0dip"
+            android:singleLine="true"
+            android:textColor="@drawable/my_group_friend_list_item_name_text_color"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/friend_list_item_signature_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="25.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/friend_list_item_name_tv"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="18.0dip"
+            android:layout_toRightOf="@id/friend_avatar_iv"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:includeFontPadding="false"
+            android:padding="0.0dip"
+            android:singleLine="true"
+            android:textColor="@drawable/my_group_friend_list_item_name_text_color"
+            android:textSize="12.0sp" />
+    </RelativeLayout>
+
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/divider"/>
+</LinearLayout>

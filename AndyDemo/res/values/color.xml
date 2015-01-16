@@ -21,6 +21,7 @@
     <color name="yellow">#ff9933</color>
     <color name="coffee">#622f1b</color>
     <color name="click_color">#2b72d6</color>
+    <color name="divider">#d7d7d7</color>
     
     <color name="txt_blue">#FF007CB0</color>
     <color name="txt_gray">#FF575756</color>
@@ -29,5 +30,8 @@
     <color name="buttom_top">#1e1e1e</color>
     <color name="buttom_center">#303030</color>
     <color name="buttom_buttom">#000000</color>
+    
+    <color name="my_group_list_normal">#f9f9f9</color>
+    <color name="my_group_list_press">#1f80ef</color>
 
 </resources>
