@@ -14,13 +14,11 @@
     <color name="light_orange">#FFACBA00</color>
     <color name="red">#FFFF0000</color>
     <color name="orange_red">#613030</color>
-    <color name="gray">#ff333333</color>
-    <color name="light_gray">#87CEEB</color>
-    <color name="white_gray">#ffC9CACB</color>
-    <color name="nomal_gray">#838B83</color>
+    <color name="gray_dark">#333333</color>
+    <color name="gray_light">#ffC9CACB</color>
+    <color name="gray">#838B83</color>
     <color name="yellow">#ff9933</color>
     <color name="coffee">#622f1b</color>
-    <color name="click_color">#2b72d6</color>
     <color name="divider">#d7d7d7</color>
     
     <color name="txt_blue">#FF007CB0</color>

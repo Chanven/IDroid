@@ -30,6 +30,7 @@
         <activity android:name="com.andy.demo.activity.ShareTestActivity"/>
         <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
         <activity android:name="com.andy.demo.activity.MyGroupActivity"/>
+        <activity android:name="com.andy.demo.activity.SimpleViewTestActivity"/>
         
     </application>
     

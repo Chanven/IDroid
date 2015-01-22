@@ -16,6 +16,11 @@
         android:layout_height="wrap_content"
         android:text="sync test"/>
     <Button 
+        android:id="@+id/simple_view_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="simple view test"/>
+    <Button 
         android:id="@+id/local_file_manager_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
