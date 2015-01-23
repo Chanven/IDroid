@@ -6,72 +6,33 @@ import java.util.List;
 import com.andy.demo.R;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class LocalFileAdapter  extends BaseAdapter{
-    
-    private List<String> items;
-    private List<String> paths;
-    private LayoutInflater inflater;
-    private Bitmap folderIcon;
-    private Bitmap fileIcon;
-    
-    public LocalFileAdapter(Context context,List<String> items,List<String> paths){
-        inflater = LayoutInflater.from(context);
-        this.items = items;
-        this.paths = paths;
-        folderIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_folder);
-        fileIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_file);
+public class LocalFileAdapter extends SimpleBaseAdapter<File>{
+
+    public LocalFileAdapter(Context context, List<File> data){
+        super(context, data);
     }
-    
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.local_file_list_item, null);
-            holder = new ViewHolder();
-            holder.name=(TextView)convertView.findViewById(R.id.local_file_list_item_name);
-            holder.icon=(ImageView)convertView.findViewById(R.id.local_file_list_item_icon);
-            convertView.setTag(holder);
+    public int getItemResource() {
+        return R.layout.local_file_list_item;
+    }
+
+    @Override
+    public View getItemView(int position, View convertView, ViewHolder holder) {
+        TextView name = holder.getChildView(R.id.local_file_list_item_name);
+        ImageView icon = holder.getChildView(R.id.local_file_list_item_icon);
+        File file = (File) getItem(position);
+        if (file.isDirectory()) {
+            icon.setImageResource(R.drawable.icon_folder);
         }else {
-            holder = (ViewHolder)convertView.getTag();
+            icon.setImageResource(R.drawable.icon_file);
         }
-        File f = new File(paths.get(position));
-        if(f.isDirectory()){
-            holder.icon.setImageBitmap(folderIcon);
-        }else {
-                holder.icon.setImageBitmap(fileIcon);
-            }
-        holder.name.setText(items.get(position));
+        name.setText(file.getName());
         return convertView;
     }
-
-    @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return items.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-    
-    private  class ViewHolder{
-        TextView name;
-        ImageView icon;
-    }
-
 
 }

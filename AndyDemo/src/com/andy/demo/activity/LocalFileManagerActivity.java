@@ -3,6 +3,7 @@ package com.andy.demo.activity;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,8 +22,6 @@ public class LocalFileManagerActivity  extends Activity{
     private int scanCode = 1;
 	private int makeCode = 2;
     
-    private ArrayList<String> items;
-    private ArrayList<String> paths;
     private String rootpath = Environment.getExternalStorageDirectory()+"/";
     
     @Override
@@ -70,11 +69,8 @@ public class LocalFileManagerActivity  extends Activity{
     }
     
     private void getFileDir(String path){
-        items = new ArrayList<String>();
-        paths = new ArrayList<String>();
-        
         File presentFile = new File(path);
-        File[] files = presentFile.listFiles();
+        List<File> files = new ArrayList<File>();
         
         /*if (! path.equals(rootpath)) {
             items.add("back to/");
@@ -84,11 +80,10 @@ public class LocalFileManagerActivity  extends Activity{
             paths.add(presentFile.getParent());
         }*/
         
-        for (File f:files) {
-            items.add(f.getName());
-            paths.add(f.getPath());
+        for (File f:presentFile.listFiles()) {
+            files.add(f);
         }
-        mListView.setAdapter(new LocalFileAdapter(LocalFileManagerActivity.this,items,paths));
+        mListView.setAdapter(new LocalFileAdapter(this, files));
     }
 
     

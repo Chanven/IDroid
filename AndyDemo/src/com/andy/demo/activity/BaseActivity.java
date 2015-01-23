@@ -33,6 +33,11 @@ public class BaseActivity extends FragmentActivity {
 		DLog.d(getClass().getSimpleName(), "onCreate()");
 	}
 	
+	/**
+	 * 等同于findViewById()
+	 * @param id
+	 * @return view
+	 */
 	@SuppressWarnings("unchecked")
     protected <T extends View> T findView(int id){
 	    return (T)super.findViewById(id);
