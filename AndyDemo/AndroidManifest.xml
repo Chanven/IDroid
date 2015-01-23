@@ -30,7 +30,15 @@
         <activity android:name="com.andy.demo.activity.ShareTestActivity"/>
         <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
         <activity android:name="com.andy.demo.activity.MyGroupActivity"/>
-        <activity android:name="com.andy.demo.activity.SimpleViewTestActivity"/>
+        <activity android:name="com.andy.demo.activity.SimpleViewTestActivity"
+            android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="andy"/>
+            </intent-filter>
+            </activity>
         
     </application>
     
@@ -39,5 +47,5 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- 缓存资源优先存入SDcard -->
     <uses-permission android:name="android.permission.INTERNET" />              <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
 	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+<!-- 	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/> -->
 </manifest>
