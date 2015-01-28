@@ -3,5 +3,6 @@
 
 <!--     <string name="app_name">Ivan\'s Demo</string> -->
     <string name="app_name">诺基丫狂拽酷炫BB机</string>
+    <string name="account_type">com.andy.demo</string>
 
 </resources>

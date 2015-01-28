@@ -39,6 +39,19 @@
                 <data android:scheme="andy"/>
             </intent-filter>
             </activity>
+            
+        <activity android:name="com.andy.demo.authenticator.AuthenticatorActivity"/>
+        
+        <service 
+            android:name="com.andy.demo.authenticator.AuthenticationService"
+            android:exported="true">
+            <intent-filter >
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data 
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/x_authenticator"/>
+        </service>
         
     </application>
     
@@ -47,5 +60,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- 缓存资源优先存入SDcard -->
     <uses-permission android:name="android.permission.INTERNET" />              <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
 	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>		<!-- 获取账号 -->
 <!-- 	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/> -->
 </manifest>

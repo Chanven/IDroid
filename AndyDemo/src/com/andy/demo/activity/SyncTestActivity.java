@@ -9,8 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.CancellationException;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -169,17 +167,6 @@ public class SyncTestActivity extends BaseActivity{
             e.printStackTrace();
         }
     }
-	
-	/**获取“账号与同步”中指定类型的账号数据*/
-	void getAccount(){
-	    AccountManager mAccountManager = AccountManager.get(this);
-	    //com.cn21.ecloud.sync 为账户类型
-        Account[] account = mAccountManager.getAccountsByType("com.cn21.ecloud.sync");
-        String accountString="";
-        for (int i = 0; i < account.length; i++) {
-            accountString = accountString+"    "+account[i] +mAccountManager.getPassword(account[i]);
-        }
-	}
 	
 	//测试http请求，json解析模块
 	class getJdInfoFramework extends AutoCancelFramework<Void, Void, KuaidiInfo>{

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    
+    <EditText 
+        android:id="@+id/authenticator_account_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="user name"/>
+    <EditText 
+        android:id="@+id/authenticator_password_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="password"/>
+    
+    <Button 
+        android:id="@+id/authenticator_commit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="handleLogin"
+        android:layout_marginTop="10dp"
+        android:text="done"/>
+    
+    <TextView 
+        android:id="@+id/account_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

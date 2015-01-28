@@ -1,5 +1,7 @@
 package com.andy.demo.utils;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,5 +35,16 @@ public class CommonUtils {
 	/**构建唯一标识*/
 	public static String buildTransaction(final String type) {
         return (type == null)? String.valueOf(System.currentTimeMillis()): type + System.currentTimeMillis();
+    }
+	
+	/**获取“账号与同步”中指定类型的账号数据*/
+    public static String getAccount(Context context,String accountType){
+        AccountManager mAccountManager = AccountManager.get(context);
+        Account[] account = mAccountManager.getAccountsByType(accountType);
+        String accountString="";
+        for (int i = 0; i < account.length; i++) {
+            accountString = accountString+"    "+account[i] +mAccountManager.getPassword(account[i]);
+        }
+        return accountString;
     }
 }

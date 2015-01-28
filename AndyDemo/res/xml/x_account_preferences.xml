@@ -1,0 +1,16 @@
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory
+            android:title="帐号设置" />
+
+    <PreferenceScreen
+        android:key="account_settings"
+        android:title="local file"
+        android:summary="local file manager summary">
+        <intent
+            android:action="com.andy.demo.setting"
+            android:targetPackage="com.andy.demo"
+            android:targetClass="com.andy.demo.activity.LocalFileManagerActivity" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

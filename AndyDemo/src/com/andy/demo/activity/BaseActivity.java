@@ -38,10 +38,10 @@ public class BaseActivity extends FragmentActivity {
 	 * @param id
 	 * @return view
 	 */
-	@SuppressWarnings("unchecked")
-    protected <T extends View> T findView(int id){
-	    return (T)super.findViewById(id);
-	}
+    @SuppressWarnings("unchecked")
+    protected <T extends View>T findView(int id) {
+        return (T) super.findViewById(id);
+    }
 	
 	// 获取和设置屏幕分辨率
 	private void initScreenDeminsion() {

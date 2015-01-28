@@ -22,5 +22,14 @@ public class Constant {
 	/** 屏幕的逻辑密度 */
     public static float DENSITY = 1.0f;
     
+    /**
+     * Account type string.
+     */
+    public static final String ACCOUNT_TYPE = "com.andy.demo";
+    /**
+     * Authtoken type string.
+     */
+    public static final String AUTHTOKEN_TYPE ="com.andy.demo.authtoken";
+    
     public static String WX_APP_ID = "wxf9caa6f564d72c8c";
 }

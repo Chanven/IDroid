@@ -41,7 +41,7 @@ public class ApplicationEx extends Application {
 			Class.forName("android.os.AsyncTask");
 			Class.forName("com.andy.android.util.AsyncFramework");
 			Class.forName("com.andy.android.util.AutoCancelFramework");
-			Class.forName("com.andy.demo.utils.netapi.AutoCancelServiceFramework");
+			Class.forName("com.andy.demo.netapi.AutoCancelServiceFramework");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
