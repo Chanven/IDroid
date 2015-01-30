@@ -11,7 +11,8 @@
         android:name="com.andy.demo.ApplicationEx"
         android:debuggable="true"
         android:icon="@drawable/icon"
-        android:label="@string/app_name" >
+        android:label="@string/app_name" 
+        android:theme="@style/AppTheme">
         
         <meta-data android:name="UMENG_APPKEY"  android:value="52d8af6c56240b9bbf004e19" />
         <meta-data android:name="UMENG_CHANNEL"  android:value="Leic" />
@@ -26,10 +27,6 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.andy.demo.activity.SyncTestActivity"/>
-        <activity android:name="com.andy.demo.activity.ShareTestActivity"/>
-        <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
-        <activity android:name="com.andy.demo.activity.MyGroupActivity"/>
         <activity android:name="com.andy.demo.activity.SimpleViewTestActivity"
             android:launchMode="singleTask">
             <intent-filter >
@@ -39,7 +36,11 @@
                 <data android:scheme="andy"/>
             </intent-filter>
             </activity>
-            
+        <activity android:name="com.andy.demo.activity.SyncTestActivity"/>
+        <activity android:name="com.andy.demo.activity.ShareTestActivity"/>
+        <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
+        <activity android:name="com.andy.demo.activity.MyGroupActivity"/>
+        <activity android:name="com.andy.demo.activity.PinnedSectionListActivity"/>
         <activity android:name="com.andy.demo.authenticator.AuthenticatorActivity"/>
         
         <service 

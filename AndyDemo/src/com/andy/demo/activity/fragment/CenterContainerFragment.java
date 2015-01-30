@@ -11,6 +11,7 @@ import com.andy.demo.R;
 import com.andy.demo.activity.BaseActivity;
 import com.andy.demo.activity.LocalFileManagerActivity;
 import com.andy.demo.activity.MyGroupActivity;
+import com.andy.demo.activity.PinnedSectionListActivity;
 import com.andy.demo.activity.ShareTestActivity;
 import com.andy.demo.activity.SimpleViewTestActivity;
 import com.andy.demo.activity.SyncTestActivity;
@@ -50,6 +51,7 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 		container.findViewById(R.id.simple_view_test).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.local_file_manager_btn).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.pinned_expandable_listview_btn).setOnClickListener(mOnClickListener);
+		container.findViewById(R.id.pinned_section_listview_btn).setOnClickListener(mOnClickListener);
 	}
 	
 	OnClickListener mOnClickListener = new OnClickListener() {
@@ -71,6 +73,9 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 			    break;
 			case R.id.pinned_expandable_listview_btn:
 			    mContext.startActivity(new Intent(mContext,MyGroupActivity.class));
+			    break;
+			case R.id.pinned_section_listview_btn:
+			    mContext.startActivity(new Intent(mContext,PinnedSectionListActivity.class));
 			    break;
 			default:
 				break;
