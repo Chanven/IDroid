@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MusicPlayActivity" >
+
+    <LinearLayout
+        android:id="@+id/music_control_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:background="@color/black"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/music_play_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:src="@drawable/music_play_pre" />
+
+        <ImageButton
+            android:id="@+id/music_play_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:src="@drawable/music_play_stop" />
+
+        <ImageButton
+            android:id="@+id/music_play_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:src="@drawable/music_play_start" />
+
+        <ImageButton
+            android:id="@+id/music_play_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:src="@drawable/music_play_pause" />
+
+        <ImageButton
+            android:id="@+id/music_play_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:src="@drawable/music_play_next" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/music_control_lyt"
+        android:drawSelectorOnTop="false" />
+
+</RelativeLayout>

@@ -6,6 +6,16 @@
 
     <uses-sdk android:minSdkVersion="7"
         android:targetSdkVersion="15" />
+    
+    <!-- ###################权限###################### -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  <!-- 检测网络状态 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- 缓存资源优先存入SDcard -->
+    <uses-permission android:name="android.permission.INTERNET" />              <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
+	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>		<!-- 获取账号 -->
+<!-- 	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/> -->
 
     <application
         android:name="com.andy.demo.ApplicationEx"
@@ -41,8 +51,10 @@
         <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
         <activity android:name="com.andy.demo.activity.MyGroupActivity"/>
         <activity android:name="com.andy.demo.activity.PinnedSectionListActivity"/>
-        <activity android:name="com.andy.demo.authenticator.AuthenticatorActivity"/>
+        <activity android:name="com.andy.demo.activity.MusicPlayActivity"/>
         
+        
+        <activity android:name="com.andy.demo.authenticator.AuthenticatorActivity"/>
         <service 
             android:name="com.andy.demo.authenticator.AuthenticationService"
             android:exported="true">
@@ -56,12 +68,4 @@
         
     </application>
     
-    <!-- ###################权限###################### -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  <!-- 检测网络状态 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- 缓存资源优先存入SDcard -->
-    <uses-permission android:name="android.permission.INTERNET" />              <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
-	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>		<!-- 获取账号 -->
-<!-- 	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/> -->
 </manifest>
