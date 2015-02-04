@@ -3,13 +3,26 @@ package com.andy.demo.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.andy.demo.R;
 
 public class SimpleViewTestActivity  extends BaseActivity{
+    DrawerLayout drawerLayout;
     ProgressBar mProgressBar;
+    ListView drawerListView;
+    Button drawerToggleBtn;
+    
+    String[] drawerListStrings;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +36,37 @@ public class SimpleViewTestActivity  extends BaseActivity{
         mProgressBar = findView(R.id.svt_progress);
         mProgressBar.setProgress(30);
         mProgressBar.setSecondaryProgress(50);
+        
+        drawerToggleBtn = findView(R.id.svt_drawer_toggle_btn);
+        drawerToggleBtn.setOnClickListener(mOnClickListener);
+        drawerListStrings = this.getResources().getStringArray(R.array.drawer_list_array);
+        drawerLayout = findView(R.id.drawerlayout_dlyt);
+        //设置drawerLayout外背景色
+        drawerLayout.setScrimColor(this.getResources().getColor(R.color.transparent));
+        drawerListView = findView(R.id.drawer_lv);
+        drawerListView.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, drawerListStrings));
+        drawerListView.setOnItemClickListener(mOnItemClickListener);
     }
+    
+    OnClickListener mOnClickListener = new OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            if (!drawerLayout.isDrawerOpen(drawerListView)) {
+                drawerLayout.openDrawer(drawerListView);
+            }
+        }
+    };
+    
+    OnItemClickListener mOnItemClickListener = new OnItemClickListener(){
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            drawerListView.setItemChecked(position, true);
+            drawerLayout.closeDrawer(drawerListView);
+            Toast.makeText(SimpleViewTestActivity.this, drawerListStrings[position], Toast.LENGTH_SHORT).show();
+        }
+    };
     
     /***
      * 测试browser跳app，在webview中 ↓↓
