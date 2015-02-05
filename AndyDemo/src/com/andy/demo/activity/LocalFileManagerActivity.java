@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -15,12 +16,13 @@ import android.widget.Toast;
 
 import com.andy.demo.R;
 import com.andy.demo.view.LocalFileAdapter;
+import com.andy.demo.zxing.activity.CaptureActivity;
 
 public class LocalFileManagerActivity  extends Activity{
     ListView mListView;
     
-    private int scanCode = 1;
-	private int makeCode = 2;
+    private static final int SCAN_CODE = 1;
+	private static final int MAKE_CODE = 2;
     
     private String rootpath = Environment.getExternalStorageDirectory()+"/";
     
@@ -34,9 +36,9 @@ public class LocalFileManagerActivity  extends Activity{
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuItem scan = menu.add(Menu.NONE, scanCode, Menu.NONE, "扫一扫");
+    	MenuItem scan = menu.add(Menu.NONE, SCAN_CODE, Menu.NONE, "扫一扫");
     	scan.setIcon(R.drawable.icon);
-		MenuItem make = menu.add(Menu.NONE, makeCode, Menu.NONE, "二维码生成");
+		MenuItem make = menu.add(Menu.NONE, MAKE_CODE, Menu.NONE, "二维码生成");
 		setIconVisible(menu, true);
     	return super.onCreateOptionsMenu(menu);
     }
@@ -61,6 +63,14 @@ public class LocalFileManagerActivity  extends Activity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Toast.makeText(this, "Selected Item: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case SCAN_CODE:
+                LocalFileManagerActivity.this.startActivity(new Intent(LocalFileManagerActivity.this,
+                                CaptureActivity.class));
+                break;
+            default:
+                break;
+        }
 		return super.onOptionsItemSelected(item);
 	}
     

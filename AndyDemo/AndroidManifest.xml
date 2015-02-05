@@ -15,6 +15,8 @@
 	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>		<!-- 获取账号 -->
+	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.VIBRATE"/>
 <!-- 	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/> -->
 
     <application
@@ -48,10 +50,13 @@
             </activity>
         <activity android:name="com.andy.demo.activity.SyncTestActivity"/>
         <activity android:name="com.andy.demo.activity.ShareTestActivity"/>
-        <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"/>
+        <activity android:name="com.andy.demo.activity.LocalFileManagerActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name="com.andy.demo.activity.MyGroupActivity"/>
         <activity android:name="com.andy.demo.activity.PinnedSectionListActivity"/>
         <activity android:name="com.andy.demo.activity.MusicPlayActivity"/>
+        <activity android:name="com.andy.demo.zxing.activity.CaptureActivity"
+            android:screenOrientation="portrait"/>
         
         
         <activity android:name="com.andy.demo.authenticator.AuthenticatorActivity"/>

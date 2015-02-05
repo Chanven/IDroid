@@ -20,5 +20,7 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
+    
+    <string name="qcode_scan_text_hint">将二维码放入框内，即可自动扫描</string>
 
 </resources>
