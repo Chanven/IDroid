@@ -3,6 +3,10 @@ package com.andy.demo.zxing.activity;
 import java.io.IOException;
 import java.util.Vector;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -20,7 +24,9 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.andy.android.util.DLog;
 import com.andy.demo.R;
 import com.andy.demo.activity.BaseActivity;
 import com.andy.demo.utils.ScreenUtils;
@@ -32,8 +38,12 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 public class CaptureActivity extends BaseActivity implements Callback{
+    
+    private static final String TAG = "CaptureActivity";
+    
     private ViewfinderView viewfinderView;
     private ImageView qcode_scan_middle_line_iv;
+    SurfaceView surfaceView;
     
     // 方框镜头的Rect
     private Rect frame;
@@ -45,7 +55,7 @@ public class CaptureActivity extends BaseActivity implements Callback{
     private InactivityTimer inactivityTimer;
     private MediaPlayer mediaPlayer;
     private boolean playBeep;
-    private static final float BEEP_VOLUME = 0.10f;
+    private static final float BEEP_VOLUME = 0.50f;
     private boolean vibrate;
     
     @Override
@@ -60,6 +70,7 @@ public class CaptureActivity extends BaseActivity implements Callback{
         
         qcode_scan_middle_line_iv = findView(R.id.qcode_scan_middle_line_iv);
         viewfinderView = findView(R.id.viewfinder_view);
+        surfaceView = (SurfaceView) findViewById(R.id.preview_view);
         
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
@@ -69,7 +80,6 @@ public class CaptureActivity extends BaseActivity implements Callback{
     @Override
     protected void onResume() {
         super.onResume();
-        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         if (hasSurface) {
@@ -155,15 +165,16 @@ public class CaptureActivity extends BaseActivity implements Callback{
     
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        DLog.i(TAG, "surfaceCreated");
         if (!hasSurface) {
             hasSurface = true;
             initCamera(holder);
         }
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        
     }
     
     @Override
@@ -227,10 +238,10 @@ public class CaptureActivity extends BaseActivity implements Callback{
         playBeepSoundAndVibrate();
         final String resultString = result.getText();
         if (TextUtils.isEmpty(resultString)) {
-//            AndroidUtil.showToast(mContext, "扫码失败", Toast.LENGTH_SHORT);
+            Toast.makeText(CaptureActivity.this, "扫码失败", Toast.LENGTH_SHORT).show();
         } else {
             // handler result
-            //...
+            handleResult(resultString);
         }  
     }
     
@@ -244,6 +255,28 @@ public class CaptureActivity extends BaseActivity implements Callback{
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             vibrator.vibrate(VIBRATE_DURATION);
         }
+    }
+    
+    private void handleResult(String result) {
+        Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(null);
+        dialog.setMessage(result);
+        dialog.setPositiveButton("OK", new OnClickListener(){
+            
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                resumeCamera();
+            }
+        });
+        dialog.show();
+    }
+    
+    /**恢复相机可扫描*/
+    private void resumeCamera() {
+        SurfaceHolder surfaceHolder = surfaceView.getHolder();
+        surfaceHolder.addCallback(this);
+        handler = null;
+        initCamera(surfaceHolder);
     }
 
 }

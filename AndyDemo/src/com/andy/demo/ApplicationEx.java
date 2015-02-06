@@ -68,7 +68,8 @@ public class ApplicationEx extends Application {
 			}
 			
 		} catch (NameNotFoundException e) {
-			throw new IllegalStateException("找不到应用程序包名", e);
+		    e.printStackTrace();
+//			throw new IllegalStateException("找不到应用程序包名", e);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

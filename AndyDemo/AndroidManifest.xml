@@ -57,6 +57,7 @@
         <activity android:name="com.andy.demo.activity.MusicPlayActivity"/>
         <activity android:name="com.andy.demo.zxing.activity.CaptureActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.andy.demo.zxing.activity.CreateQrCodeActivity"/>
         
         
         <activity android:name="com.andy.demo.authenticator.AuthenticatorActivity"/>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.andy.demo.R;
 import com.andy.demo.view.LocalFileAdapter;
 import com.andy.demo.zxing.activity.CaptureActivity;
+import com.andy.demo.zxing.activity.CreateQrCodeActivity;
 
 public class LocalFileManagerActivity  extends Activity{
     ListView mListView;
@@ -67,6 +68,10 @@ public class LocalFileManagerActivity  extends Activity{
             case SCAN_CODE:
                 LocalFileManagerActivity.this.startActivity(new Intent(LocalFileManagerActivity.this,
                                 CaptureActivity.class));
+                break;
+            case MAKE_CODE:
+                LocalFileManagerActivity.this.startActivity(new Intent(LocalFileManagerActivity.this,
+                    CreateQrCodeActivity.class));
                 break;
             default:
                 break;
