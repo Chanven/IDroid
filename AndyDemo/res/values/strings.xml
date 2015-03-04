@@ -10,6 +10,11 @@
     <string name="action_showShadow">Show shadow</string>
     <string name="action_showHeaderAndFooter">Show Header &amp; Footer</string>
     
+    <string name="google_sdk">google_sdk</string>
+    <string name="sdk">sdk</string>
+    <string name="build_host">ics-build-machine</string>
+    <string name="build_brand">generic</string>
+    
     <string-array name="drawer_list_array">
         <item>Mercury</item>
         <item>Venus</item>

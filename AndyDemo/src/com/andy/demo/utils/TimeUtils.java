@@ -1,11 +1,13 @@
 package com.andy.demo.utils;
 
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 public class TimeUtils {
@@ -325,6 +327,7 @@ public class TimeUtils {
 		String sDateTime = sdf.format(dt);  //得到精确到秒的表示：2006-08-31 21:08:00
 		return sDateTime;
 	}
+	
 	/**
 	 * 获取格林威治时间*/
     public static String getGelinData(){
@@ -332,6 +335,7 @@ public class TimeUtils {
     	return data.toGMTString();
     	
     }
+    
     /**
      * 获取当时间时间，格式为yyyyMMddHHmmss
      * @return nowTime
@@ -357,6 +361,23 @@ public class TimeUtils {
 		return sDateTime;
     }
 	 
-    
+    /**
+     * 将制定的日期类型转换为时间戳
+     * @param dateFormate   如yyyy-MM-dd HH:mm:ss.SSS
+     * @param fromTime      如2014-06-25 12:12:12.123
+     * @return   时间戳
+     */
+    @SuppressLint("SimpleDateFormat")
+    public static long transformDateStringToTimestamp(String dateFormat, String fromTime) {
+        long timeStemp = 0L;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+            Date date = simpleDateFormat.parse(fromTime);
+            timeStemp = date.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timeStemp;
+    }
    
 }

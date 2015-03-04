@@ -23,7 +23,7 @@ public class LocalFileManagerActivity  extends Activity{
     ListView mListView;
     
     private static final int SCAN_CODE = 1;
-	private static final int MAKE_CODE = 2;
+	private static final int CREATE_CODE = 2;
     
     private String rootpath = Environment.getExternalStorageDirectory()+"/";
     
@@ -39,7 +39,7 @@ public class LocalFileManagerActivity  extends Activity{
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuItem scan = menu.add(Menu.NONE, SCAN_CODE, Menu.NONE, "扫一扫");
     	scan.setIcon(R.drawable.icon);
-		MenuItem make = menu.add(Menu.NONE, MAKE_CODE, Menu.NONE, "二维码生成");
+		MenuItem create = menu.add(Menu.NONE, CREATE_CODE, Menu.NONE, "二维码生成");
 		setIconVisible(menu, true);
     	return super.onCreateOptionsMenu(menu);
     }
@@ -69,7 +69,7 @@ public class LocalFileManagerActivity  extends Activity{
                 LocalFileManagerActivity.this.startActivity(new Intent(LocalFileManagerActivity.this,
                                 CaptureActivity.class));
                 break;
-            case MAKE_CODE:
+            case CREATE_CODE:
                 LocalFileManagerActivity.this.startActivity(new Intent(LocalFileManagerActivity.this,
                     CreateQrCodeActivity.class));
                 break;

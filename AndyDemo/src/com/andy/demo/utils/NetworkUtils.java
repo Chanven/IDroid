@@ -3,6 +3,7 @@ package com.andy.demo.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Proxy;
 
 import com.andy.demo.ApplicationEx;
 import com.andy.demo.netapi.exception.XResponseException;
@@ -37,7 +38,7 @@ public class NetworkUtils {
     }
 	
 	/**
-	 * 用于获取网络标识（WIFI、CTWap、CTNet）
+	 * 用于获取网络标识信息（WIFI、CTWap、CTNet）
 	 * @param context
 	 * @return  当前网络信息
 	 */
@@ -54,4 +55,36 @@ public class NetworkUtils {
 			return null;
 		}
 	}
+	
+	public static final int CONNENCTION_CMNET = 0;// 网络类型是cmnet
+
+    public static final int CONNENCTION_CMWAP = 1;// 网络类型是cmwap
+
+    public static final int CONNENCTION_WIFI = 2;// 网络类型是wifi
+
+    public static final int CONNENCTION_NO_NET = -1;// 无法连接到网络
+	
+	/**
+     * 获取网络类型
+     * @param context
+     * @return
+     */
+    public static int getNetworkType(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivity.getActiveNetworkInfo();
+        if (info == null ||
+            (info.getState() != NetworkInfo.State.CONNECTING && info.getState() != NetworkInfo.State.CONNECTED)) {
+            return CONNENCTION_NO_NET;
+        }
+        if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+            return CONNENCTION_WIFI;
+        } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
+            if (Proxy.getDefaultHost() != null || Proxy.getHost(context) != null) {
+                return CONNENCTION_CMWAP;
+            } else {
+                return CONNENCTION_CMNET;
+            }
+        }
+        return CONNENCTION_NO_NET;
+    }
 }

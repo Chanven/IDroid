@@ -21,10 +21,20 @@ public class ScreenUtils
 		/* cannot be instantiated */
 		throw new UnsupportedOperationException("cannot be instantiated");
 	}
+	
+	/**
+     * 获取屏幕密度DPI
+     * @param context
+     * @return
+     */
+    public int getDisplayDensity(Activity context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.densityDpi;
+    }
 
 	/**
 	 * 获得屏幕高度
-	 * 
 	 * @param context
 	 * @return
 	 */
@@ -39,7 +49,6 @@ public class ScreenUtils
 
 	/**
 	 * 获得屏幕宽度
-	 * 
 	 * @param context
 	 * @return
 	 */

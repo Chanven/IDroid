@@ -157,8 +157,9 @@ public class SyncTestActivity extends BaseActivity{
             
             OutputStream output = new FileOutputStream(newFile);
             byte[] buffer = new byte[1024];
-            while(istream.read(buffer)!=-1){
-                output.write(buffer);
+            int length;
+            while((length = istream.read(buffer)) > 0){
+                output.write(buffer,0,length);
             }
             output.flush();
             output.close();
