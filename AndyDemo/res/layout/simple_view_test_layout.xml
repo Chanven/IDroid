@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.andy.demo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -33,6 +34,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="drawer menu"/>
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp" >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/enless_image_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.andy.demo.view.widget.ImageIndicator
+                    android:id="@+id/image_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent_gray"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="14dp"
+                    android:paddingRight="50dp"
+                    app:count="0"
+                    app:point_normal_color="#aaffffff"
+                    app:point_radius="3dip"
+                    app:point_seleted_color="#c21a0e"
+                    app:point_size="5dip"
+                    app:space="10dip" />
+            </RelativeLayout>
+
         </LinearLayout>
 
         <!-- 2、左侧滑出的list，宽度需要固定下，不要满屏 -->

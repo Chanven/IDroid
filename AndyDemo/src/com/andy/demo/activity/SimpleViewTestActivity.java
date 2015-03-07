@@ -1,8 +1,12 @@
 package com.andy.demo.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,12 +19,19 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.andy.demo.R;
+import com.andy.demo.view.EndlessLoopViewPaperAdapter;
+import com.andy.demo.view.widget.ImageIndicator;
 
 public class SimpleViewTestActivity  extends BaseActivity{
     DrawerLayout drawerLayout;
     ProgressBar mProgressBar;
     ListView drawerListView;
     Button drawerToggleBtn;
+    
+    ImageIndicator mIndicator;
+    ViewPager mViewPager;
+    EndlessLoopViewPaperAdapter mAdapter;
+    List<String> mImageList;
     
     String[] drawerListStrings;
     
@@ -36,6 +47,9 @@ public class SimpleViewTestActivity  extends BaseActivity{
         mProgressBar = findView(R.id.svt_progress);
         mProgressBar.setProgress(30);
         mProgressBar.setSecondaryProgress(50);
+        
+        mIndicator = findView(R.id.image_indicator);
+        mViewPager = findView(R.id.enless_image_viewpager);
         
         drawerToggleBtn = findView(R.id.svt_drawer_toggle_btn);
         drawerToggleBtn.setOnClickListener(mOnClickListener);
@@ -86,5 +100,14 @@ public class SimpleViewTestActivity  extends BaseActivity{
                 Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
             }
         }
+        
+        mImageList = new ArrayList<String>();
+        mImageList.add(String.valueOf(R.drawable.bigbang));
+        mImageList.add(String.valueOf(R.drawable.hannibal));
+        
+        mIndicator.setCount(mImageList.size());
+        mAdapter = new EndlessLoopViewPaperAdapter(this, mViewPager, mIndicator, mImageList);
+        mViewPager.setAdapter(mAdapter);
+        mAdapter.setCurrentItem();
     }
 }
