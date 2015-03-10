@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.andy.demo.R;
-import com.andy.demo.view.widget.ImageIndicator;
-
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
@@ -17,6 +14,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.andy.demo.R;
+import com.andy.demo.view.widget.ImageIndicator;
 
 public class EndlessLoopViewPaperAdapter extends PagerAdapter 
 		implements ViewPager.OnPageChangeListener{
@@ -235,7 +235,6 @@ public class EndlessLoopViewPaperAdapter extends PagerAdapter
 	@Override
 	public void onPageScrolled(int position, float positionOffset,
 			int positionOffsetPixels) {
-		System.out.println("" + positionOffset + slidedAble);
 		if (0.01 < positionOffset && positionOffset < 0.99) {
 			if (slidedAble) {
 				setHadSlided(true);

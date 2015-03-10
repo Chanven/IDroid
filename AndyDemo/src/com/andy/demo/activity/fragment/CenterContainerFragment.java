@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.andy.demo.R;
 import com.andy.demo.activity.BaseActivity;
+import com.andy.demo.activity.FragmentWithTabActivity;
 import com.andy.demo.activity.LocalFileManagerActivity;
 import com.andy.demo.activity.MusicPlayActivity;
 import com.andy.demo.activity.MyGroupActivity;
@@ -50,6 +51,7 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 		container.findViewById(R.id.share_test).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.sync_test).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.simple_view_test).setOnClickListener(mOnClickListener);
+		container.findViewById(R.id.fragment_viewpager_tab_btn).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.local_file_manager_btn).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.music_play_btn).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.pinned_expandable_listview_btn).setOnClickListener(mOnClickListener);
@@ -69,6 +71,9 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 				break;
 			case R.id.simple_view_test:
 			    mContext.startActivity(new Intent(mContext,SimpleViewTestActivity.class));
+			    break;
+			case R.id.fragment_viewpager_tab_btn:
+			    mContext.startActivity(new Intent(mContext,FragmentWithTabActivity.class));
 			    break;
 			case R.id.local_file_manager_btn:
 			    mContext.startActivity(new Intent(mContext,LocalFileManagerActivity.class));

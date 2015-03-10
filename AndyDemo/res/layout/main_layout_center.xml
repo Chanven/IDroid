@@ -21,6 +21,11 @@
         android:layout_height="wrap_content"
         android:text="simple view test"/>
     <Button 
+        android:id="@+id/fragment_viewpager_tab_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FragmentPager + Tab"/>
+    <Button 
         android:id="@+id/local_file_manager_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

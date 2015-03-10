@@ -26,6 +26,7 @@
     <color name="orange_light">#ffffbb33</color>
     <color name="blue_light">#ff33b5e5</color>
     
+    <!-- 文本 -->
     <color name="txt_blue">#FF007CB0</color>
     <color name="txt_gray">#FF575756</color>
     <color name="txt_orange">#FFEB6100</color>
@@ -36,6 +37,9 @@
     
     <color name="my_group_list_normal">#f9f9f9</color>
     <color name="my_group_list_press">#1f80ef</color>
+    
+    <color name="top_tab_selected">#F64141</color>
+    <color name="top_tab_unselected">#ECECED</color>
     
     <!-- 二维码 -->
     <color name="bg_color">#EDEDED</color>

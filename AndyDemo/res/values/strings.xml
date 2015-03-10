@@ -5,6 +5,10 @@
     <string name="app_name">诺基丫狂拽酷炫BB机</string>
     <string name="account_type">com.andy.demo</string>
     
+    <string name="fragment_tab_1">one</string>
+    <string name="fragment_tab_2">two</string>
+    <string name="fragment_tab_3">three</string>
+    
     <string name="action_fastscroll">Fast scroll</string>
     <string name="action_addpadding">Add padding</string>
     <string name="action_showShadow">Show shadow</string>
