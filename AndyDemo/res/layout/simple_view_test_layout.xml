@@ -60,6 +60,15 @@
                     app:point_size="5dip"
                     app:space="10dip" />
             </RelativeLayout>
+            
+            <com.andy.demo.view.widget.FontTextView 
+                android:id="@+id/svt_ftv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="    hello,this is the cotillion font"
+                app:font="@string/font_cotillion"
+                android:textColor="@color/red"/>
 
         </LinearLayout>
 

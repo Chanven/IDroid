@@ -31,5 +31,9 @@
     </string-array>
     
     <string name="qcode_scan_text_hint">将二维码放入框内，即可自动扫描</string>
+    
+    <string name="font_cotillion">cotillion_regular</string>
+    <string name="font_kindness">kindness</string>
+    <string name="font_diamond">diamond_dust</string>
 
 </resources>
