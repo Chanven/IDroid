@@ -13,6 +13,7 @@
                 <corners android:radius="10dip" />
                 <!-- gradient表示渐变  -->
                 <!-- angle表示方向，0为从左到右 ，逆时针90为从下往上，必须45的倍数  -->
+                <!-- centerX centerY在android:type="radial"时表示中心点的相对位置 -->
                 <gradient
                     android:angle="270"
                     android:centerColor="@color/gray_light"
