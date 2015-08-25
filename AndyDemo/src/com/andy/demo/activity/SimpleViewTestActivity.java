@@ -92,6 +92,7 @@ public class SimpleViewTestActivity  extends BaseActivity{
      * <p>context.startActivity(intent);</p>
      */
     private void initData() {
+    	//接收browser跳转intent
         Intent intent = getIntent();
         if (null != intent && Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
