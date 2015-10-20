@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.andy.demo.R;
-import com.andy.demo.view.EndlessLoopViewPaperAdapter;
+import com.andy.demo.adapter.EndlessLoopViewPaperAdapter;
 import com.andy.demo.view.widget.ImageIndicator;
 
 public class SimpleViewTestActivity  extends BaseActivity{

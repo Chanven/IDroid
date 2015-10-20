@@ -12,6 +12,7 @@ import com.andy.demo.activity.BaseActivity;
 import com.andy.demo.activity.FragmentWithTabActivity;
 import com.andy.demo.activity.LocalFileManagerActivity;
 import com.andy.demo.activity.MusicPlayActivity;
+import com.andy.demo.activity.MyContactAcitivy;
 import com.andy.demo.activity.MyGroupActivity;
 import com.andy.demo.activity.PinnedSectionListActivity;
 import com.andy.demo.activity.ShareTestActivity;
@@ -56,6 +57,7 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 		container.findViewById(R.id.music_play_btn).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.pinned_expandable_listview_btn).setOnClickListener(mOnClickListener);
 		container.findViewById(R.id.pinned_section_listview_btn).setOnClickListener(mOnClickListener);
+		container.findViewById(R.id.local_contacts_btn).setOnClickListener(mOnClickListener);
 	}
 	
 	OnClickListener mOnClickListener = new OnClickListener() {
@@ -87,6 +89,9 @@ public class CenterContainerFragment extends DrawerChildViewFragment{
 			case R.id.pinned_section_listview_btn:
 			    mContext.startActivity(new Intent(mContext,PinnedSectionListActivity.class));
 			    break;
+			case R.id.local_contacts_btn:
+				mContext.startActivity(new Intent(mContext,MyContactAcitivy.class));
+				break;
 			default:
 				break;
 			}

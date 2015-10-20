@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <com.andy.demo.view.pinnedheader.PinnedHeaderListView
+            android:id="@+id/lv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fastScrollEnabled="true"
+            android:dividerHeight="0dp"
+            android:divider="@null" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_contact_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" 
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_contact_select"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+        
+        <TextView 
+            android:id="@+id/tv_contact_selected_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"/>
+        
+    </LinearLayout>
+
+</LinearLayout>

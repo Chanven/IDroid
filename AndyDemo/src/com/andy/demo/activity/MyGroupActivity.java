@@ -1,7 +1,7 @@
 package com.andy.demo.activity;
 
 import com.andy.demo.R;
-import com.andy.demo.view.MyGroupAdapter;
+import com.andy.demo.adapter.MyGroupAdapter;
 import com.andy.demo.view.widget.PinnedExpandableListView;
 
 import android.os.Bundle;

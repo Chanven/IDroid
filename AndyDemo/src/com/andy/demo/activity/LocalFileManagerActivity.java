@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.andy.demo.R;
-import com.andy.demo.view.LocalFileAdapter;
+import com.andy.demo.adapter.LocalFileAdapter;
 import com.andy.demo.zxing.activity.CaptureActivity;
 import com.andy.demo.zxing.activity.CreateQrCodeActivity;
 

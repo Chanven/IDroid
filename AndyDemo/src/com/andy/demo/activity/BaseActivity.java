@@ -20,12 +20,12 @@ public class BaseActivity extends FragmentActivity {
 	protected Button mh_left_btn, mh_right_btn;
 	protected TextView mh_title_tv;
 	
-	private AutoCancelController mAutoCancelController = new AutoCancelController();
+	private AutoCancelController mAutoCancelController;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// 放入活动管理器
 		ApplicationEx application = (ApplicationEx) this.getApplication();
 		application.getActivityManager().pushActivity(this);
@@ -79,6 +79,9 @@ public class BaseActivity extends FragmentActivity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		if (null != mAutoCancelController) {
+			mAutoCancelController.clean();
+		}
 		ApplicationEx application = (ApplicationEx) getApplication();
 		application.getActivityManager().popActivity(this);
 		DLog.d(getClass().getSimpleName(), "OnDestroy()");
@@ -99,6 +102,9 @@ public class BaseActivity extends FragmentActivity {
 	}
 
 	public AutoCancelController getAutoCancelController() {
+		if (null == mAutoCancelController) {
+			mAutoCancelController = new AutoCancelController();
+		}
 		return mAutoCancelController;
 	}
 	

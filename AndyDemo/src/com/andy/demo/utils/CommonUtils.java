@@ -114,7 +114,12 @@ public class CommonUtils {
         return value;
     }
     
-    // 获取AndroidManifest.xml的<meta-data>节点数据
+    /** 
+     * 获取AndroidManifest.xml的<meta-data>节点数据
+     * @param c
+     * @param nodeString
+     * @return
+     */
     public static String getMetaDataNodeString(Context c, String nodeString) {
         String result = "";
         try {
@@ -128,7 +133,12 @@ public class CommonUtils {
         return result;
     }
 
-    // 获取AndroidManifest.xml的<meta-data>节点数据（Int类型）
+    /**
+     *  获取AndroidManifest.xml的<meta-data>节点数据（Int类型）
+     * @param c
+     * @param nodeString
+     * @return
+     */
     public static int getMetaDataNodeInt(Context c, String nodeString) {
         int result = 1;
         try {
@@ -161,7 +171,7 @@ public class CommonUtils {
     }
     
     /**
-     * 去分隔符与前缀
+     * 去除分隔符与前缀
      * @param num 传入号码
      * @return
      */
@@ -262,6 +272,25 @@ public class CommonUtils {
     }
     
     /**
+     * 检查是否有某项权限
+     * modify by chenyl 2015-4-22 判断Android5.0版本以下才能执行这个判断，目前Android5.0版本不兼容这个判断
+     * */
+    public static boolean havePermission(Context context, String permission){
+    	int APILevel = 0;
+    	try {  
+    		APILevel = android.os.Build.VERSION.SDK_INT;  
+        } catch (NumberFormatException e) {  
+            e.printStackTrace();  
+        }
+    	if(APILevel < 21){
+    		PackageManager pm = context.getPackageManager();
+    		String packageName = "com.corp21cn.flowpay";
+    		return PackageManager.PERMISSION_GRANTED == pm.checkPermission(permission, packageName);
+    	}
+    	return true;
+    }
+    
+    /**
      * 将浮点型数据转换为百分数
      * @param numberFloat 需要转换的浮点型数据
      * @return
@@ -282,5 +311,78 @@ public class CommonUtils {
     public static float transformPercentToFloat(String formatString) {
         float floatResult = Float.valueOf((formatString.substring(0, formatString.indexOf("%")))) / 100;
         return floatResult;
+    }
+    
+    /**
+     * 判断字符是不是标点符号
+     * 
+     * @param str
+     * @return
+     */
+    public static boolean isPunctuation(char charAt) {
+        Pattern pattern = null;
+        Matcher matcher = null;
+        String charStr = String.valueOf(charAt);
+        boolean isChinese = isChinese(charAt);
+        if (!isChinese) {
+            String reg1 = "[a-zA-Z0-9]";
+            pattern = Pattern.compile(reg1);
+            matcher = pattern.matcher(charStr);
+            return !matcher.matches();
+        } else {
+            String reg2 = "[\\p{Punct}\\x00-\\x80\\uFE30-\\uFFA0]";
+            pattern = Pattern.compile(reg2);
+            matcher = pattern.matcher(charStr);
+            return matcher.matches();
+        }
+    }
+
+    /**
+     * 判断字符是不是字母
+     * 
+     * @param str
+     * @return
+     */
+    public static boolean isLetter(String str) {
+        if (str != null) {
+            String reg1 = "[a-zA-Z]";
+            Pattern pattern = Pattern.compile(reg1);
+            Matcher matcher = pattern.matcher(str);
+            return matcher.matches();
+        } else {
+            return false;
+        }
+    }
+
+    // 根据Unicode编码完美的判断中文汉字和符号
+    public static boolean isChinese(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS ||
+            ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS ||
+            ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A ||
+            ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B ||
+            ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION ||
+            ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS ||
+            ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 字符串纯数字判断
+     * 
+     * @param str
+     * @return
+     */
+    public static boolean isPuleNumber(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return false;
+        }
+        String reg = "^\\d*";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(str);
+        boolean flag = matcher.matches();
+        return flag;
     }
 }
