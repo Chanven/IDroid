@@ -1,19 +1,22 @@
 package com.andy.demo.activity;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.andy.android.util.AutoCancelController;
 import com.andy.android.util.Cancellable;
 import com.andy.android.util.DLog;
 import com.andy.demo.ApplicationEx;
 import com.andy.demo.base.Constant;
+import com.andy.demo.view.UniLoadingDialog;
 
 public class BaseActivity extends FragmentActivity {
 
@@ -21,6 +24,8 @@ public class BaseActivity extends FragmentActivity {
 	protected TextView mh_title_tv;
 	
 	private AutoCancelController mAutoCancelController;
+	
+	private UniLoadingDialog mLoadingDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +111,52 @@ public class BaseActivity extends FragmentActivity {
 			mAutoCancelController = new AutoCancelController();
 		}
 		return mAutoCancelController;
+	}
+	
+	/**显示加载框*/
+	protected void showLoadingDialog(){
+		if (null == mLoadingDialog) {
+			mLoadingDialog = new UniLoadingDialog(this);
+		}
+		mLoadingDialog.show();
+	}
+	
+	/**隐藏加载框*/
+	protected void dismissLoadingDialog(){
+		if (null != mLoadingDialog && mLoadingDialog.isShowing()) {
+			mLoadingDialog.dismiss();
+		}
+	}
+	
+	protected void toastMsgLong(int resId) {
+		toastMsgLong(getString(resId));
+	}
+	
+	protected void toastMsgShort(int resId) {
+		toastMsgShort(getString(resId));
+	}
+	
+	protected void toastMsgLong(String msg) {
+		show(msg, Toast.LENGTH_LONG);
+	}
+	protected void toastMsgShort(String msg) {
+		show(msg, Toast.LENGTH_SHORT);
+	}
+	
+	protected void show(final String msg, final int duration) {
+		if (TextUtils.isEmpty(msg)) {
+			return;
+		}
+		if (Looper.myLooper() != Looper.getMainLooper()) {
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(BaseActivity.this, msg, duration).show();
+				}
+			});
+		}else {
+			Toast.makeText(BaseActivity.this, msg, duration).show();
+		}
 	}
 	
 }

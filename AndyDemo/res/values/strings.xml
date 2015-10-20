@@ -19,6 +19,8 @@
     <string name="build_host">ics-build-machine</string>
     <string name="build_brand">generic</string>
     
+    <string name="loading">Loading...</string>
+    
     <string-array name="drawer_list_array">
         <item>Mercury</item>
         <item>Venus</item>

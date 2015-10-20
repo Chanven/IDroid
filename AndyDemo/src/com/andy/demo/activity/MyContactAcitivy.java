@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -41,6 +42,7 @@ public class MyContactAcitivy extends BaseActivity{
 	private List<LocalContact> mLocalContactInfos;
 	
 	private int mSelectNum;
+	private boolean isAll;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class MyContactAcitivy extends BaseActivity{
 		mSelectBtn = findView(R.id.btn_contact_select);
 		mSelectLyt = findView(R.id.lyt_contact_select);
 		mSelectNumTv = findView(R.id.tv_contact_selected_num);
+		
+		mSelectBtn.setOnClickListener(mOnClickListener);
 	}
 	
 	private void initData() {
@@ -64,6 +68,21 @@ public class MyContactAcitivy extends BaseActivity{
 		new getLocalContactFramework(getAutoCancelController()).executeOnExecutor(ApplicationEx.app
 				.getMainExecutor());
 	}
+	
+	OnClickListener mOnClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.btn_contact_select:
+				checkAll();
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
 	
 	OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 		
@@ -100,11 +119,44 @@ public class MyContactAcitivy extends BaseActivity{
 		}
 	};
 	
+	/**全选/反选*/
+	private void checkAll() {
+		isAll = !isAll;
+		int size = mLocalContactInfos.size();
+		if (size > 0) {
+			for (int i = 0; i < size; i++) {
+				LocalContact contact = mLocalContactInfos.get(i);
+				contact.setCheck(isAll);
+			}
+		}
+		mAdapter.notifyDataSetChanged();
+		if (isAll) {
+			mSelectNum = size;
+			mSelectBtn.setText("UnSelect All");
+		}else {
+			mSelectNum = 0;
+			mSelectBtn.setText("Select All");
+		}
+		mSelectNumTv.setText(mSelectNum + " items selected");
+	}
+	
 	void setAdapter(){
 		if (null == mAdapter) {
 			mAdapter = new ContactAdapter(this);
 		}
 		mAdapter.setContacts(mLocalContactInfos, "");
+	}
+	
+	/**get the selected contact list*/
+	private List<LocalContact> getSelectedContacts() {
+		List<LocalContact> result = new ArrayList<LocalContact>();
+		for (int i = 0; i < mLocalContactInfos.size(); i++) {
+			LocalContact contact = mLocalContactInfos.get(i);
+			if (contact.isCheck()) {
+				result.add(contact);
+			}
+		}
+		return result;
 	}
 	
 	class getLocalContactFramework extends AutoCancelFramework<Void, Void, List<LocalContact>>{
@@ -116,6 +168,7 @@ public class MyContactAcitivy extends BaseActivity{
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			showLoadingDialog();
 		}
 
 		@Override
@@ -126,6 +179,7 @@ public class MyContactAcitivy extends BaseActivity{
 		@Override
 		protected void onPostExecute(List<LocalContact> result) {
 			super.onPostExecute(result);
+			dismissLoadingDialog();
 			if (null != result && result.size() > 0) {
 				mLocalContactInfos = result;
 				setAdapter();

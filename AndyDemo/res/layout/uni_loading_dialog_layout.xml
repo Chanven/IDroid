@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="@drawable/loading_bg"
+    android:orientation="horizontal" >
+    
+    <ProgressBar 
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:indeterminate="true"
+        android:indeterminateOnly="true"
+        android:indeterminateDuration="1000"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateDrawable="@drawable/uni_loading_dialog_circle"/>
+    
+    <TextView 
+        android:id="@+id/uni_loading_dialog_msg_tv"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="17dp"
+        android:text="@string/loading"
+        android:textColor="@color/white"/>
+    
+
+</LinearLayout>
