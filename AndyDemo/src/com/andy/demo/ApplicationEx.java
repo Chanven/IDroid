@@ -54,6 +54,7 @@ public class ApplicationEx extends Application {
 			PackageInfo pkgInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 			if(pkgInfo.versionName != null) {
 				Constant.VERSION = pkgInfo.versionName;
+				Constant.PACKAGE_NAME = pkgInfo.packageName;
 			} else {
 				throw new IllegalStateException("应用程序版本号为空");
 			}

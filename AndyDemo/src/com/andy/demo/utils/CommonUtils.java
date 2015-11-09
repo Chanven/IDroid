@@ -7,6 +7,8 @@ import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.andy.demo.base.Constant;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -86,15 +88,15 @@ public class CommonUtils {
     }
 	
 	/**获取“账号与同步”中指定类型的账号数据*/
-    public static String getAccount(Context context,String accountType){
-        AccountManager mAccountManager = AccountManager.get(context);
-        Account[] account = mAccountManager.getAccountsByType(accountType);
-        String accountString="";
-        for (int i = 0; i < account.length; i++) {
-            accountString = accountString+"    "+account[i] +mAccountManager.getPassword(account[i]);
-        }
-        return accountString;
-    }
+	public static String getAccount(Context context, String accountType) {
+		AccountManager mAccountManager = AccountManager.get(context);
+		Account[] account = mAccountManager.getAccountsByType(accountType);
+		String accountString = "";
+		for (int i = 0; i < account.length; i++) {
+			accountString = accountString + "    " + account[i] + mAccountManager.getPassword(account[i]);
+		}
+		return accountString;
+	}
     
     /**
      * 获取字符串的MD5检验码
@@ -273,22 +275,22 @@ public class CommonUtils {
     
     /**
      * 检查是否有某项权限
-     * modify by chenyl 2015-4-22 判断Android5.0版本以下才能执行这个判断，目前Android5.0版本不兼容这个判断
+     * 判断Android5.0版本以下才能执行这个判断，目前Android5.0版本不兼容这个判断
      * */
-    public static boolean havePermission(Context context, String permission){
-    	int APILevel = 0;
-    	try {  
-    		APILevel = android.os.Build.VERSION.SDK_INT;  
-        } catch (NumberFormatException e) {  
-            e.printStackTrace();  
-        }
-    	if(APILevel < 21){
-    		PackageManager pm = context.getPackageManager();
-    		String packageName = "com.corp21cn.flowpay";
-    		return PackageManager.PERMISSION_GRANTED == pm.checkPermission(permission, packageName);
-    	}
-    	return true;
-    }
+	public static boolean havePermission(Context context, String permission) {
+		int APILevel = 0;
+		try {
+			APILevel = android.os.Build.VERSION.SDK_INT;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		if (APILevel < 21) {
+			PackageManager pm = context.getPackageManager();
+			String packageName = Constant.PACKAGE_NAME;
+			return PackageManager.PERMISSION_GRANTED == pm.checkPermission(permission, packageName);
+		}
+		return true;
+	}
     
     /**
      * 将浮点型数据转换为百分数

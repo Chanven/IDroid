@@ -8,12 +8,16 @@ import java.util.List;
 import java.util.Set;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
+import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,14 +33,23 @@ import com.andy.demo.adapter.ContactAdapter;
 import com.andy.demo.analysis.bean.LocalContact;
 import com.andy.demo.utils.CommonUtils;
 import com.andy.demo.utils.PinYin;
+import com.andy.demo.utils.ScreenUtils;
 import com.andy.demo.view.pinnedheader.PinnedHeaderListView;
 import com.andy.demo.view.pinnedheader.PinnedHeaderListView.OnItemClickListener;
+import com.andy.demo.view.widget.ContactSideBar;
 
+/**
+ * 本地联系人
+ * @author Chanven
+ * @date 2015-10-6
+ */
 public class MyContactAcitivy extends BaseActivity{
 	private PinnedHeaderListView mListView;
 	private Button mSelectBtn;
 	private LinearLayout mSelectLyt;
 	private TextView mSelectNumTv;
+	private ContactSideBar mSideBar;
+	private TextView mCurrentCharTv;
 	
 	private ContactAdapter mAdapter;
 	private List<LocalContact> mLocalContactInfos;
@@ -59,12 +72,17 @@ public class MyContactAcitivy extends BaseActivity{
 		mSelectNumTv = findView(R.id.tv_contact_selected_num);
 		
 		mSelectBtn.setOnClickListener(mOnClickListener);
+		
+		mSideBar = findView(R.id.sidebar_contact);
+		initCurrentChar();
+		mSideBar.setTextView(mCurrentCharTv);
 	}
 	
 	private void initData() {
 		mAdapter = new ContactAdapter(this);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(mOnItemClickListener);
+		mSideBar.setListView(mListView);
 		new getLocalContactFramework(getAutoCancelController()).executeOnExecutor(ApplicationEx.app
 				.getMainExecutor());
 	}
@@ -82,6 +100,24 @@ public class MyContactAcitivy extends BaseActivity{
 			}
 		}
 	};
+	
+	protected void initCurrentChar() {
+		WindowManager windowManager;
+		mCurrentCharTv = (TextView) LayoutInflater.from(this).inflate(R.layout.contact_current_char, null);
+		mCurrentCharTv.setVisibility(View.INVISIBLE);
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
+				ScreenUtils.dip2px(this, 80),
+				ScreenUtils.dip2px(this, 80),
+				WindowManager.LayoutParams.TYPE_APPLICATION,
+				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+				PixelFormat.TRANSLUCENT);
+		windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+		try {
+			windowManager.addView(mCurrentCharTv, lp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	OnItemClickListener mOnItemClickListener = new OnItemClickListener() {

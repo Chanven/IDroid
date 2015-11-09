@@ -8,10 +8,10 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
- * ƴ��������
+ * pinyin工具类
  */
 public class PinyinUtils {
-
+	
 	private static PinyinUtils utils = null;
 
 	public static PinyinUtils getInstance() {
@@ -26,7 +26,7 @@ public class PinyinUtils {
 	}
 
 	/**
-	 * ��ú���ƴ������ĸ
+	 * 获取首字母(汉字，并自动大写；字母和数字不处理)拼写
 	 * */
 	public String getAlpha(String chines) {
 		String pinyinName = "";
@@ -52,10 +52,9 @@ public class PinyinUtils {
 	}
 
 	/**
-	 * ���ַ��е�����ת��Ϊƴ��,�����ַ��
+	 * 获取名字全拼拼写(小写)
 	 * 
 	 * @param inputString
-	 * @return ƴ��
 	 */
 	public String getPingYin(String inputString) {
 		HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
@@ -83,11 +82,9 @@ public class PinyinUtils {
 	}
 
 	/**
-	 * ����ת��λ����ƴ������ĸ��Ӣ���ַ��
+	 * 获取首字母(汉字，并自动大写；字母和数字不处理)拼写
 	 * 
 	 * @param chines
-	 *            ����
-	 * @return ƴ��
 	 */
 	public String converterToFirstSpell(String chines) {
 		String pinyinName = "";

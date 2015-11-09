@@ -14,9 +14,18 @@
             android:id="@+id/lv_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fastScrollEnabled="true"
             android:dividerHeight="0dp"
             android:divider="@null" />
+        
+        <com.andy.demo.view.widget.ContactSideBar
+            android:id="@+id/sidebar_contact"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_sidebar_selector"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="10dp"
+            android:visibility="visible" />
     </RelativeLayout>
 
     <LinearLayout

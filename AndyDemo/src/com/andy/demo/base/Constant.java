@@ -8,6 +8,7 @@ public class Constant {
 	public static String format = "json";
 	public static String clientType = "7";
 	
+	public static String PACKAGE_NAME = "";
 	public static String VERSION = "";
 	public static String ID = "";
 	public static String IMEI = "";
