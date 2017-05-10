@@ -1,10 +1,5 @@
 apply plugin: 'com.android.application'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    compile project(':myslidingmenu_library')
-}
-
 android {
     compileSdkVersion 17
     buildToolsVersion "23.0.1"
@@ -32,4 +27,9 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile project(':myslidingmenu_library')
 }
