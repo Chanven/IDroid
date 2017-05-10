@@ -16,6 +16,9 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.andy.demo.R;
 import com.andy.demo.activity.fragment.TestFragment;
 
+/**
+ * 带tab选择fragment(ViewPager)的Activity
+ */
 public class FragmentWithTabActivity extends FragmentActivity{
     RadioGroup tabRadioGroup;
     ViewPager mViewPager;

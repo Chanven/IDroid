@@ -1,14 +1,5 @@
 package com.andy.demo.utils;
 
-import java.io.File;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.text.NumberFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.andy.demo.base.Constant;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -22,16 +13,26 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.andy.demo.base.Constant;
+
+import java.io.File;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.text.NumberFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CommonUtils {
-    
+
     /**
      * 显示软键盘
+     *
      * @param context
      * @param view
      */
@@ -46,6 +47,7 @@ public class CommonUtils {
 
     /**
      * 隐藏软键盘
+     *
      * @param context
      */
     public static void hideKeyboard(Context context) {
@@ -53,53 +55,58 @@ public class CommonUtils {
             InputMethodManager imm = ((InputMethodManager) context.getSystemService(context.INPUT_METHOD_SERVICE));
             if (((Activity) context).getCurrentFocus() != null) {
                 imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
+                        InputMethodManager.HIDE_NOT_ALWAYS);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-	
-	/**
-	 * 更改飞行模式状态
-	 * 只适用于4.2以下版本
-	 * */
-	public static void changeAirplaneStatus(Context context){
-		ContentResolver cr = context.getContentResolver();
-		//获取当前飞行模式状态，0为关闭，1为开启
-		boolean isAirModeOn = false;
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			isAirModeOn = Settings.System.getString(cr, Settings.System.AIRPLANE_MODE_ON).equals("1");
-		}else {
-			isAirModeOn = Settings.Global.getString(cr, Settings.Global.AIRPLANE_MODE_ON).equals("1");
-		}
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			Settings.System.putString(cr, Settings.System.AIRPLANE_MODE_ON, isAirModeOn? "0":"1");
-		}else {
-			Settings.Global.putString(cr, Settings.Global.AIRPLANE_MODE_ON, isAirModeOn? "0":"1");
-		}
-		Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);     
-		context.sendBroadcast(intent);  
-	}
-	
-	/**构建唯一标识*/
-	public static String buildTransaction(final String type) {
-        return (type == null)? String.valueOf(System.currentTimeMillis()): type + System.currentTimeMillis();
+
+    /**
+     * 更改飞行模式状态
+     * 只适用于4.2以下版本
+     */
+    public static void changeAirplaneStatus(Context context) {
+        ContentResolver cr = context.getContentResolver();
+        //获取当前飞行模式状态，0为关闭，1为开启
+        boolean isAirModeOn = false;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            isAirModeOn = Settings.System.getString(cr, Settings.System.AIRPLANE_MODE_ON).equals("1");
+        } else {
+            isAirModeOn = Settings.Global.getString(cr, Settings.Global.AIRPLANE_MODE_ON).equals("1");
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            Settings.System.putString(cr, Settings.System.AIRPLANE_MODE_ON, isAirModeOn ? "0" : "1");
+        } else {
+            Settings.Global.putString(cr, Settings.Global.AIRPLANE_MODE_ON, isAirModeOn ? "0" : "1");
+        }
+        Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        context.sendBroadcast(intent);
     }
-	
-	/**获取“账号与同步”中指定类型的账号数据*/
-	public static String getAccount(Context context, String accountType) {
-		AccountManager mAccountManager = AccountManager.get(context);
-		Account[] account = mAccountManager.getAccountsByType(accountType);
-		String accountString = "";
-		for (int i = 0; i < account.length; i++) {
-			accountString = accountString + "    " + account[i] + mAccountManager.getPassword(account[i]);
-		}
-		return accountString;
-	}
-    
+
+    /**
+     * 构建唯一标识
+     */
+    public static String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
+
+    /**
+     * 获取“账号与同步”中指定类型的账号数据
+     */
+    public static String getAccount(Context context, String accountType) {
+        AccountManager mAccountManager = AccountManager.get(context);
+        Account[] account = mAccountManager.getAccountsByType(accountType);
+        String accountString = "";
+        for (int i = 0; i < account.length; i++) {
+            accountString = accountString + "    " + account[i] + mAccountManager.getPassword(account[i]);
+        }
+        return accountString;
+    }
+
     /**
      * 获取字符串的MD5检验码
+     *
      * @param str
      * @return
      */
@@ -115,9 +122,10 @@ public class CommonUtils {
         }
         return value;
     }
-    
-    /** 
+
+    /**
      * 获取AndroidManifest.xml的<meta-data>节点数据
+     *
      * @param c
      * @param nodeString
      * @return
@@ -126,7 +134,7 @@ public class CommonUtils {
         String result = "";
         try {
             ApplicationInfo aInfo =
-                            c.getPackageManager().getApplicationInfo(c.getPackageName(), PackageManager.GET_META_DATA);
+                    c.getPackageManager().getApplicationInfo(c.getPackageName(), PackageManager.GET_META_DATA);
             result = aInfo.metaData.getString(nodeString);
         } catch (NameNotFoundException e) {
             e.printStackTrace();
@@ -136,7 +144,8 @@ public class CommonUtils {
     }
 
     /**
-     *  获取AndroidManifest.xml的<meta-data>节点数据（Int类型）
+     * 获取AndroidManifest.xml的<meta-data>节点数据（Int类型）
+     *
      * @param c
      * @param nodeString
      * @return
@@ -145,7 +154,7 @@ public class CommonUtils {
         int result = 1;
         try {
             ApplicationInfo aInfo =
-                            c.getPackageManager().getApplicationInfo(c.getPackageName(), PackageManager.GET_META_DATA);
+                    c.getPackageManager().getApplicationInfo(c.getPackageName(), PackageManager.GET_META_DATA);
             Object object = aInfo.metaData.get(nodeString);
             if (object instanceof Integer) {
                 result = (Integer) object;
@@ -155,9 +164,10 @@ public class CommonUtils {
         }
         return result;
     }
-    
+
     /**
      * 匹配手机号码
+     *
      * @param num 传入号码
      * @return
      */
@@ -171,9 +181,10 @@ public class CommonUtils {
         boolean flag = matcher.matches();
         return flag;
     }
-    
+
     /**
      * 去除分隔符与前缀
+     *
      * @param num 传入号码
      * @return
      */
@@ -186,15 +197,16 @@ public class CommonUtils {
                 phoneNum = phoneNum.replaceFirst("[+]{1}86", "");
             }
             if (phoneNum.startsWith("12593") || phoneNum.startsWith("17900") || phoneNum.startsWith("17909") ||
-                phoneNum.startsWith("17911") || phoneNum.startsWith("17951")) {
+                    phoneNum.startsWith("17911") || phoneNum.startsWith("17951")) {
                 phoneNum = phoneNum.replaceFirst("12593|17900|17909|17911|17951", "");
             }
         }
         return phoneNum;
     }
-    
+
     /**
      * 手机号码判断
+     *
      * @param num 传入号码
      * @return
      */
@@ -203,9 +215,10 @@ public class CommonUtils {
         boolean flag = matchMobilNo(str);
         return flag;
     }
-    
+
     /**
      * 根据手机号查询本地联系人姓名
+     *
      * @param context
      * @param phone
      * @return
@@ -236,9 +249,10 @@ public class CommonUtils {
         }
         return name;
     }
-    
+
     /**
      * 判断应用是否安装
+     *
      * @param context
      * @param appPkgName
      * @return
@@ -253,9 +267,10 @@ public class CommonUtils {
         }
         return flag & (pInfo != null);
     }
-    
+
     /**
      * 安装APK文件
+     *
      * @return
      */
     public static void installApk(Context context, String path, String name) {
@@ -272,28 +287,29 @@ public class CommonUtils {
         i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
         context.startActivity(i);
     }
-    
+
     /**
      * 检查是否有某项权限
      * 判断Android5.0版本以下才能执行这个判断，目前Android5.0版本不兼容这个判断
-     * */
-	public static boolean havePermission(Context context, String permission) {
-		int APILevel = 0;
-		try {
-			APILevel = android.os.Build.VERSION.SDK_INT;
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		if (APILevel < 21) {
-			PackageManager pm = context.getPackageManager();
-			String packageName = Constant.PACKAGE_NAME;
-			return PackageManager.PERMISSION_GRANTED == pm.checkPermission(permission, packageName);
-		}
-		return true;
-	}
-    
+     */
+    public static boolean havePermission(Context context, String permission) {
+        int APILevel = 0;
+        try {
+            APILevel = android.os.Build.VERSION.SDK_INT;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        if (APILevel < 21) {
+            PackageManager pm = context.getPackageManager();
+            String packageName = Constant.PACKAGE_NAME;
+            return PackageManager.PERMISSION_GRANTED == pm.checkPermission(permission, packageName);
+        }
+        return true;
+    }
+
     /**
      * 将浮点型数据转换为百分数
+     *
      * @param numberFloat 需要转换的浮点型数据
      * @return
      */
@@ -307,6 +323,7 @@ public class CommonUtils {
 
     /**
      * 将百分数转换为浮点型数据
+     *
      * @param formatString 需要转换的百分数
      * @return
      */
@@ -314,10 +331,10 @@ public class CommonUtils {
         float floatResult = Float.valueOf((formatString.substring(0, formatString.indexOf("%")))) / 100;
         return floatResult;
     }
-    
+
     /**
      * 判断字符是不是标点符号
-     * 
+     *
      * @param str
      * @return
      */
@@ -341,7 +358,7 @@ public class CommonUtils {
 
     /**
      * 判断字符是不是字母
-     * 
+     *
      * @param str
      * @return
      */
@@ -360,12 +377,12 @@ public class CommonUtils {
     public static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
         if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS ||
-            ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS ||
-            ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A ||
-            ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B ||
-            ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION ||
-            ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS ||
-            ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
+                ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS ||
+                ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A ||
+                ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B ||
+                ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION ||
+                ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS ||
+                ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
             return true;
         }
         return false;
@@ -373,7 +390,7 @@ public class CommonUtils {
 
     /**
      * 字符串纯数字判断
-     * 
+     *
      * @param str
      * @return
      */

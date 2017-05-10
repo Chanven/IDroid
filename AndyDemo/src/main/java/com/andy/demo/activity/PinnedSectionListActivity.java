@@ -1,11 +1,5 @@
 package com.andy.demo.activity;
 
-import java.util.Locale;
-
-import com.andy.demo.R;
-import com.andy.demo.view.widget.PinnedSectionListView;
-import com.andy.demo.view.widget.PinnedSectionListView.PinnedSectionListAdapter;
-
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Context;
@@ -24,13 +18,19 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andy.demo.R;
+import com.andy.demo.view.widget.PinnedSectionListView;
+import com.andy.demo.view.widget.PinnedSectionListView.PinnedSectionListAdapter;
+
+import java.util.Locale;
+
 public class PinnedSectionListActivity extends ListActivity implements OnClickListener {
 
     static class SimpleAdapter extends ArrayAdapter<Item> implements PinnedSectionListAdapter {
 
-        private static final int[] COLORS = new int[] {
-            R.color.green_light, R.color.orange_light,
-            R.color.blue_light, R.color.red_light };
+        private static final int[] COLORS = new int[]{
+                R.color.green_light, R.color.orange_light,
+                R.color.blue_light, R.color.red_light};
 
         public SimpleAdapter(Context context, int resource, int textViewResourceId) {
             super(context, resource, textViewResourceId);
@@ -39,15 +39,15 @@ public class PinnedSectionListActivity extends ListActivity implements OnClickLi
             prepareSections(sectionsNumber);
 
             int sectionPosition = 0, listPosition = 0;
-            for (char i=0; i<sectionsNumber; i++) {
-                Item section = new Item(Item.SECTION, String.valueOf((char)('A' + i)));
+            for (char i = 0; i < sectionsNumber; i++) {
+                Item section = new Item(Item.SECTION, String.valueOf((char) ('A' + i)));
                 section.sectionPosition = sectionPosition;
                 section.listPosition = listPosition++;
                 onSectionAdded(section, sectionPosition);
                 add(section);
 
-                final int itemsNumber = (int) Math.abs((Math.cos(2f*Math.PI/3f * sectionsNumber / (i+1f)) * 25f));
-                for (int j=0;j<itemsNumber;j++) {
+                final int itemsNumber = (int) Math.abs((Math.cos(2f * Math.PI / 3f * sectionsNumber / (i + 1f)) * 25f));
+                for (int j = 0; j < itemsNumber; j++) {
                     Item item = new Item(Item.ITEM, section.text.toUpperCase(Locale.ENGLISH) + " - " + j);
                     item.sectionPosition = sectionPosition;
                     item.listPosition = listPosition++;
@@ -58,10 +58,13 @@ public class PinnedSectionListActivity extends ListActivity implements OnClickLi
             }
         }
 
-        protected void prepareSections(int sectionsNumber) { }
-        protected void onSectionAdded(Item section, int sectionPosition) { }
+        protected void prepareSections(int sectionsNumber) {
+        }
 
-        @Override 
+        protected void onSectionAdded(Item section, int sectionPosition) {
+        }
+
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             TextView view = (TextView) super.getView(position, convertView, parent);
             view.setTextColor(Color.DKGRAY);
@@ -74,12 +77,12 @@ public class PinnedSectionListActivity extends ListActivity implements OnClickLi
             return view;
         }
 
-        @Override 
+        @Override
         public int getViewTypeCount() {
             return 2;
         }
 
-        @Override 
+        @Override
         public int getItemViewType(int position) {
             return getItem(position).type;
         }
@@ -99,26 +102,31 @@ public class PinnedSectionListActivity extends ListActivity implements OnClickLi
             super(context, resource, textViewResourceId);
         }
 
-        @Override protected void prepareSections(int sectionsNumber) {
+        @Override
+        protected void prepareSections(int sectionsNumber) {
             sections = new Item[sectionsNumber];
         }
 
-        @Override protected void onSectionAdded(Item section, int sectionPosition) {
+        @Override
+        protected void onSectionAdded(Item section, int sectionPosition) {
             sections[sectionPosition] = section;
         }
 
-        @Override public Item[] getSections() {
+        @Override
+        public Item[] getSections() {
             return sections;
         }
 
-        @Override public int getPositionForSection(int section) {
+        @Override
+        public int getPositionForSection(int section) {
             if (section >= sections.length) {
                 section = sections.length - 1;
             }
             return sections[section].listPosition;
         }
 
-        @Override public int getSectionForPosition(int position) {
+        @Override
+        public int getSectionForPosition(int position) {
             if (position >= getCount()) {
                 position = getCount() - 1;
             }
@@ -127,109 +135,109 @@ public class PinnedSectionListActivity extends ListActivity implements OnClickLi
 
     }
 
-	static class Item {
+    static class Item {
 
-		public static final int ITEM = 0;
-		public static final int SECTION = 1;
+        public static final int ITEM = 0;
+        public static final int SECTION = 1;
 
-		public final int type;
-		public final String text;
+        public final int type;
+        public final String text;
 
-		public int sectionPosition;
-		public int listPosition;
+        public int sectionPosition;
+        public int listPosition;
 
-		public Item(int type, String text) {
-		    this.type = type;
-		    this.text = text;
-		}
+        public Item(int type, String text) {
+            this.type = type;
+            this.text = text;
+        }
 
-		@Override 
-		public String toString() {
-			return text;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	}
+    }
 
-	private boolean hasHeaderAndFooter;
-	private boolean isFastScroll;
-	private boolean addPadding;
-	private boolean isShadowVisible = true;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pinned_section_list_layout);
-		if (savedInstanceState != null) {
-		    isFastScroll = savedInstanceState.getBoolean("isFastScroll");
-		    addPadding = savedInstanceState.getBoolean("addPadding");
-		    isShadowVisible = savedInstanceState.getBoolean("isShadowVisible");
-		    hasHeaderAndFooter = savedInstanceState.getBoolean("hasHeaderAndFooter");
-		}
-		initializeHeaderAndFooter();
-		initializeAdapter();
-		initializePadding();
-	}
+    private boolean hasHeaderAndFooter;
+    private boolean isFastScroll;
+    private boolean addPadding;
+    private boolean isShadowVisible = true;
 
     @Override
-	protected void onSaveInstanceState(Bundle outState) {
-	    super.onSaveInstanceState(outState);
-	    outState.putBoolean("isFastScroll", isFastScroll);
-	    outState.putBoolean("addPadding", addPadding);
-	    outState.putBoolean("isShadowVisible", isShadowVisible);
-	    outState.putBoolean("hasHeaderAndFooter", hasHeaderAndFooter);
-	}
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pinned_section_list_layout);
+        if (savedInstanceState != null) {
+            isFastScroll = savedInstanceState.getBoolean("isFastScroll");
+            addPadding = savedInstanceState.getBoolean("addPadding");
+            isShadowVisible = savedInstanceState.getBoolean("isShadowVisible");
+            hasHeaderAndFooter = savedInstanceState.getBoolean("hasHeaderAndFooter");
+        }
+        initializeHeaderAndFooter();
+        initializeAdapter();
+        initializePadding();
+    }
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-	    Item item = (Item) getListView().getAdapter().getItem(position);
-	    if (item != null) {
-	        Toast.makeText(this, "Item " + position + ": " + item.text, Toast.LENGTH_SHORT).show();
-	    } else {
-	        Toast.makeText(this, "Item " + position, Toast.LENGTH_SHORT).show();
-	    }
-	}
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("isFastScroll", isFastScroll);
+        outState.putBoolean("addPadding", addPadding);
+        outState.putBoolean("isShadowVisible", isShadowVisible);
+        outState.putBoolean("hasHeaderAndFooter", hasHeaderAndFooter);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.pinned_section_menu, menu);
-		menu.getItem(0).setChecked(isFastScroll);
-		menu.getItem(1).setChecked(addPadding);
-		menu.getItem(2).setChecked(isShadowVisible);
-		return true;
-	}
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        Item item = (Item) getListView().getAdapter().getItem(position);
+        if (item != null) {
+            Toast.makeText(this, "Item " + position + ": " + item.text, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Item " + position, Toast.LENGTH_SHORT).show();
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-    	    case R.id.action_fastscroll:
-    	        isFastScroll = !isFastScroll;
-    	        item.setChecked(isFastScroll);
-    	        initializeAdapter();
-    	        break;
-    	    case R.id.action_addpadding:
-    	        addPadding = !addPadding;
-    	        item.setChecked(addPadding);
-    	        initializePadding();
-    	        break;
-    	    case R.id.action_showShadow:
-    	        isShadowVisible = !isShadowVisible;
-    	        item.setChecked(isShadowVisible);
-    	        ((PinnedSectionListView)getListView()).setShadowVisible(isShadowVisible);
-    	        break;
-    	    case R.id.action_showHeaderAndFooter:
-    	        hasHeaderAndFooter = !hasHeaderAndFooter;
-    	        item.setChecked(hasHeaderAndFooter);
-    	        initializeHeaderAndFooter();
-    	        break;
-	    }
-	    return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.pinned_section_menu, menu);
+        menu.getItem(0).setChecked(isFastScroll);
+        menu.getItem(1).setChecked(addPadding);
+        menu.getItem(2).setChecked(isShadowVisible);
+        return true;
+    }
 
-	private void initializePadding() {
-	    float density = getResources().getDisplayMetrics().density;
-	    int padding = addPadding ? (int) (16 * density) : 0;
-	    getListView().setPadding(padding, padding, padding, padding);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_fastscroll:
+                isFastScroll = !isFastScroll;
+                item.setChecked(isFastScroll);
+                initializeAdapter();
+                break;
+            case R.id.action_addpadding:
+                addPadding = !addPadding;
+                item.setChecked(addPadding);
+                initializePadding();
+                break;
+            case R.id.action_showShadow:
+                isShadowVisible = !isShadowVisible;
+                item.setChecked(isShadowVisible);
+                ((PinnedSectionListView) getListView()).setShadowVisible(isShadowVisible);
+                break;
+            case R.id.action_showHeaderAndFooter:
+                hasHeaderAndFooter = !hasHeaderAndFooter;
+                item.setChecked(hasHeaderAndFooter);
+                initializeHeaderAndFooter();
+                break;
+        }
+        return true;
+    }
+
+    private void initializePadding() {
+        float density = getResources().getDisplayMetrics().density;
+        int padding = addPadding ? (int) (16 * density) : 0;
+        getListView().setPadding(padding, padding, padding, padding);
+    }
 
     private void initializeHeaderAndFooter() {
         setListAdapter(null);
@@ -267,7 +275,7 @@ public class PinnedSectionListActivity extends ListActivity implements OnClickLi
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "Item: " + v.getTag() , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Item: " + v.getTag(), Toast.LENGTH_SHORT).show();
     }
 
 }

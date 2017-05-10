@@ -1,25 +1,25 @@
 package com.andy.demo.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * BaseAdapter基类
- * @author guoch
  *
  * @param <T>
+ * @author guoch
  */
 public abstract class SimpleBaseAdapter<T> extends BaseAdapter {
     protected List<T> mData;
     protected Context mContext;
-    
-    public SimpleBaseAdapter(Context context,List<T> data){
+
+    public SimpleBaseAdapter(Context context, List<T> data) {
         this.mContext = context;
         this.mData = data == null ? new ArrayList<T>() : data;
     }
@@ -41,15 +41,17 @@ public abstract class SimpleBaseAdapter<T> extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    
+
     /**
-     *  该方法需要子类实现，需要返回item布局的resource layout id
+     * 该方法需要子类实现，需要返回item布局的resource layout id
+     *
      * @return id
      */
     public abstract int getItemResource();
-    
+
     /**
      * 使用该getItemView()方法替换原来的getView()方法，需要子类实现
+     *
      * @param position
      * @param convertView
      * @param viewHolder
@@ -65,48 +67,48 @@ public abstract class SimpleBaseAdapter<T> extends BaseAdapter {
             convertView = View.inflate(mContext, getItemResource(), null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         return getItemView(position, convertView, holder);
     }
-    
-    public void addAll(List<T> elem){
+
+    public void addAll(List<T> elem) {
         mData.addAll(elem);
         notifyDataSetChanged();
     }
-    
-    public void add(T elem){
+
+    public void add(T elem) {
         mData.add(elem);
         notifyDataSetChanged();
     }
-    
-    public void remove(T elem){
+
+    public void remove(T elem) {
         mData.remove(elem);
         notifyDataSetChanged();
     }
-    
-    public void remove(int index){
+
+    public void remove(int index) {
         mData.remove(index);
         notifyDataSetChanged();
     }
-    
-    public void replaceAll(List<T> elem){
+
+    public void replaceAll(List<T> elem) {
         mData.clear();
         mData.addAll(elem);
         notifyDataSetChanged();
     }
-    
-    public class ViewHolder{
+
+    public class ViewHolder {
         private SparseArray<View> viewHolder = new SparseArray<View>();
         private View convertView;
-        
-        public ViewHolder(View view){
+
+        public ViewHolder(View view) {
             this.convertView = view;
         }
-        
+
         @SuppressWarnings("unchecked")
-        public <T extends View>T getChildView(int resId) {
+        public <T extends View> T getChildView(int resId) {
             View childView = viewHolder.get(resId);
             if (null == childView) {
                 childView = convertView.findViewById(resId);

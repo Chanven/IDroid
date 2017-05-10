@@ -1,7 +1,5 @@
 package com.andy.demo.adapter;
 
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +12,8 @@ import com.andy.demo.R;
 import com.andy.demo.view.widget.PinnedExpandableListView;
 import com.andy.demo.view.widget.PinnedExpandableListView.PinnedExpandableHeaderAdapter;
 
+import java.util.HashMap;
+
 public class MyGroupAdapter extends BaseExpandableListAdapter implements PinnedExpandableHeaderAdapter {
     // Sample data set. children[i] contains the children (String[]) for groups[i].
     LayoutInflater mInflater;
@@ -25,13 +25,13 @@ public class MyGroupAdapter extends BaseExpandableListAdapter implements PinnedE
     private String[] groups = {"第一组", "第二组", "第三组", "第四组"};
 
     private String[][] children = {
-                    {"Way", "Arnold", "Barry", "Chuck", "David", "Afghanistan", "Albania", "Belgium", "Lily", "Jim",
-                                    "LiMing", "Jodan"},
-                    {"Ace", "Bandit", "Cha-Cha", "Deuce", "Bahamas", "China", "Dominica", "Jim", "LiMing", "Jodan"},
-                    {"Fluffy", "Snuggles", "Ecuador", "Ecuador", "Jim", "LiMing", "Jodan"},
-                    {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"}};
+            {"Way", "Arnold", "Barry", "Chuck", "David", "Afghanistan", "Albania", "Belgium", "Lily", "Jim",
+                    "LiMing", "Jodan"},
+            {"Ace", "Bandit", "Cha-Cha", "Deuce", "Bahamas", "China", "Dominica", "Jim", "LiMing", "Jodan"},
+            {"Fluffy", "Snuggles", "Ecuador", "Ecuador", "Jim", "LiMing", "Jodan"},
+            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"}};
 
-    public MyGroupAdapter(Activity activity, PinnedExpandableListView listView){
+    public MyGroupAdapter(Activity activity, PinnedExpandableListView listView) {
         mInflater = (LayoutInflater) activity.getLayoutInflater();
         this.mListView = listView;
         groupStatusMap = new HashMap<Integer, Integer>();
@@ -77,7 +77,7 @@ public class MyGroupAdapter extends BaseExpandableListAdapter implements PinnedE
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.my_group_list_item_view, null);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.name = (TextView) convertView.findViewById(R.id.friend_list_item_name_tv);
@@ -122,7 +122,7 @@ public class MyGroupAdapter extends BaseExpandableListAdapter implements PinnedE
     public void configureTreeHeader(View header, int groupPosition, int childPosition, int alpha) {
         ((TextView) header.findViewById(R.id.group_name)).setText(groups[groupPosition]);
         ((TextView) header.findViewById(R.id.online_count)).setText(getChildrenCount(groupPosition) + "/" +
-                                                                    getChildrenCount(groupPosition));
+                getChildrenCount(groupPosition));
     }
 
     @Override
@@ -138,8 +138,8 @@ public class MyGroupAdapter extends BaseExpandableListAdapter implements PinnedE
             return 0;
         }
     }
-    
-    class ViewHolder{
+
+    class ViewHolder {
         private TextView name;
         private TextView signature;
     }

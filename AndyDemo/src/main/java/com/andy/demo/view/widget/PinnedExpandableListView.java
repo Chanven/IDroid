@@ -14,17 +14,17 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 
 public class PinnedExpandableListView extends ExpandableListView implements OnScrollListener, OnGroupClickListener {
 
-    public PinnedExpandableListView(Context context, AttributeSet attrs, int defStyle){
+    public PinnedExpandableListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         registerListener();
     }
 
-    public PinnedExpandableListView(Context context, AttributeSet attrs){
+    public PinnedExpandableListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         registerListener();
     }
 
-    public PinnedExpandableListView(Context context){
+    public PinnedExpandableListView(Context context) {
         super(context);
         registerListener();
     }
@@ -41,16 +41,16 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
 
         /**
          * 获取 Header 的状态
-         * 
+         *
          * @param groupPosition
          * @param childPosition
-         * @return PINNED_HEADER_GONE,PINNED_HEADER_VISIBLE,PINNED_HEADER_PUSHED_UP 其中之一
+         * @return PINNED_HEADER_GONE, PINNED_HEADER_VISIBLE, PINNED_HEADER_PUSHED_UP 其中之一
          */
         int getTreeHeaderState(int groupPosition, int childPosition);
 
         /**
          * 配置 Header, 让 Header 知道显示的内容
-         * 
+         *
          * @param header
          * @param groupPosition
          * @param childPosition
@@ -60,7 +60,7 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
 
         /**
          * 设置组按下的状态
-         * 
+         *
          * @param groupPosition
          * @param status
          */
@@ -68,7 +68,7 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
 
         /**
          * 获取组按下的状态
-         * 
+         *
          * @param groupPosition
          * @return
          */
@@ -97,8 +97,8 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
     public void setHeaderView(View view) {
         mHeaderView = view;
         AbsListView.LayoutParams lp =
-                        new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(lp);
 
         if (mHeaderView != null) {
@@ -157,7 +157,7 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
                     float offsetY = Math.abs(y - mDownY);
                     // 如果 HeaderView 是可见的 , 点击在 HeaderView 内 , 那么触发 headerClick()
                     if (x <= mHeaderViewWidth && y <= mHeaderViewHeight && offsetX <= mHeaderViewWidth &&
-                        offsetY <= mHeaderViewHeight) {
+                            offsetY <= mHeaderViewHeight) {
                         if (mHeaderView != null) {
                             headerViewClick();
                         }
@@ -181,7 +181,6 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
     }
 
     /**
-     * 
      * 点击了 Group 触发的事件 , 要根据根据当前点击 Group 的状态来
      */
     @Override
@@ -309,5 +308,6 @@ public class PinnedExpandableListView extends ExpandableListView implements OnSc
     }
 
     @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {}
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
 }
